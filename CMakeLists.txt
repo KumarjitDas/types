@@ -1,6 +1,6 @@
 # file: CMakeLists.txt
 # author: Kumarjit Das
-# date: 2024-06-29
+# date: 2024-07-01
 # brief: TYPES library main cmake file.
 
 # BSD 2-Clause License
@@ -49,7 +49,7 @@ include("CMake/validate_target_platform.cmake")
 include("CMake/validate_build_config.cmake")
 
 # Fetch external libraries
-include("CMake/fetch_external_libs.cmake")
+include("cmake/add_external_libs.cmake")
 
 # Create the main library
 include("CMake/create_library.cmake")

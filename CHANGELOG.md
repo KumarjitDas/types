@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.0.0](https://github.com/KumarjitDas/types/releases/tag/v1.0.0) - 2024-06-29
+## [v1.0.0](https://github.com/KumarjitDas/types/releases/tag/v1.0.0) - 2024-07-01
 
 ### Added
 

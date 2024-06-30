@@ -1,6 +1,6 @@
 # file: set_build_output_directories.cmake
 # author: Kumarjit Das
-# date: 2024-06-29
+# date: 2024-07-01
 # brief: TYPES library cmake build output directory configuration file.
 
 # BSD 2-Clause License

@@ -1,6 +1,6 @@
 # file: install_nonproject_files.cmake
 # author: Kumarjit Das
-# date: 2024-06-29
+# date: 2024-07-01
 # brief: TYPES library cmake export rules file.
 
 # BSD 2-Clause License

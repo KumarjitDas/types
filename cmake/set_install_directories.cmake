@@ -1,6 +1,6 @@
 # file: set_install_directories.cmake
 # author: Kumarjit Das
-# date: 2024-06-29
+# date: 2024-07-01
 # brief: TYPES library cmake install directories configuration file.
 
 # BSD 2-Clause License

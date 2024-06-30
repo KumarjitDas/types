@@ -1,6 +1,6 @@
 # file: set_c_standard.cmake
 # author: Kumarjit Das
-# date: 2024-06-29
+# date: 2024-07-01
 # brief: TYPES library cmake C standard configuration file.
 
 # BSD 2-Clause License

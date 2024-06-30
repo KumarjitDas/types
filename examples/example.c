@@ -1,7 +1,7 @@
 /**
  * @file example.c
  * @author Kumarjit Das
- * @date 2024-06-29
+ * @date 2024-07-01
  * @brief TYPES library main example source file.
  */
 /**
@@ -34,6 +34,7 @@
 
 
 #include <stdio.h>
+#include <stdint.h>
 #include "types.h"
 
 
@@ -43,23 +44,20 @@ int main(int argc, char **argv)
   i8 val_i8;
   i16 val_i16;
   i32 val_i32;
-
-  #if defined TYPES_64BIT_INTEGER
-  i64 val_i64;
-  #endif  /* TYPES_64BIT_INTEGER */
-
   imin val_imin;
   imax val_imax;
   u8 val_u8;
   u16 val_u16;
   u32 val_u32;
+  umin val_umin;
+  umax val_umax;
 
   #if defined TYPES_64BIT_INTEGER
+  i64 val_i64;
   u64 val_u64;
   #endif  /* TYPES_64BIT_INTEGER */
 
-  umin val_umin;
-  umax val_umax;
+  usize val_usize;
   byte val_byte;
   charcode val_charcode;
   f32 val_f32;
@@ -80,23 +78,20 @@ int main(int argc, char **argv)
   (void) printf("SZ_I8 = %d,\n", SZ_I8);
   (void) printf("SZ_I16 = %d,\n", SZ_I16);
   (void) printf("SZ_I32 = %d,\n", SZ_I32);
-
-  #if defined TYPES_64BIT_INTEGER
-  (void) printf("SZ_I64 = %d,\n", SZ_I64);
-  #endif  /* TYPES_64BIT_INTEGER */
-
   (void) printf("SZ_IMIN = %d,\n", SZ_IMIN);
   (void) printf("SZ_IMAX = %d,\n", SZ_IMAX);
   (void) printf("SZ_U8 = %d,\n", SZ_U8);
   (void) printf("SZ_U16 = %d,\n", SZ_U16);
   (void) printf("SZ_U32 = %d,\n", SZ_U32);
-
-  #if defined TYPES_64BIT_INTEGER
-  (void)printf("SZ_U64 = %d,\n", SZ_U64);
-  #endif  /* TYPES_64BIT_INTEGER */
-
   (void) printf("SZ_UMIN = %d,\n", SZ_UMIN);
   (void) printf("SZ_UMAX = %d,\n", SZ_UMAX);
+
+  #if defined TYPES_64BIT_INTEGER
+  (void) printf("SZ_I64 = %d,\n", SZ_I64);
+  (void) printf("SZ_U64 = %d,\n", SZ_U64);
+  #endif  /* TYPES_64BIT_INTEGER */
+
+  (void) printf("SZ_USIZE = %d,\n", SZ_USIZE);
   (void) printf("SZ_BYTE = %d,\n", SZ_BYTE);
   (void) printf("SZ_CHARCODE = %d,\n", SZ_CHARCODE);
   (void) printf("SZ_F32 = %d,\n", SZ_F32);
@@ -112,23 +107,20 @@ int main(int argc, char **argv)
   val_i8 = MAX_I8;
   val_i16 = MAX_I16;
   val_i32 = MAX_I32;
-
-  #if defined TYPES_64BIT_INTEGER
-  val_i64 = MAX_I64;
-  #endif  /* TYPES_64BIT_INTEGER */
-
   val_imin = MAX_IMIN;
   val_imax = MAX_IMAX;
   val_u8 = MAX_U8;
   val_u16 = MAX_U16;
   val_u32 = MAX_U32;
+  val_umin = MAX_UMIN;
+  val_umax = MAX_UMAX;
 
   #if defined TYPES_64BIT_INTEGER
+  val_i64 = MAX_I64;
   val_u64 = MAX_U64;
   #endif  /* TYPES_64BIT_INTEGER */
 
-  val_umin = MAX_UMIN;
-  val_umax = MAX_UMAX;
+  val_usize = MAX_USIZE;
   val_byte = MAX_BYTE;
   val_charcode = MAX_CHARCODE;
   val_f32 = MAX_F32;
@@ -142,32 +134,62 @@ int main(int argc, char **argv)
   (void) printf("val_i8 = %d,\n", (i32) val_i8);
   (void) printf("val_i16 = %hd,\n", val_i16);
   (void) printf("val_i32 = %d,\n", val_i32);
-
-  #if defined TYPES_64BIT_INTEGER
-  (void) printf("val_i64 = %lld,\n", val_i64);
-  #endif  /* TYPES_64BIT_INTEGER */
-
   (void) printf("val_imin = %d,\n", (i32) val_imin);
-  (void) printf("val_imax = %lld,\n", val_imax);
+
+  (void) printf(
+    "val_imax = "
+    #ifdef TYPES_64BIT_INTEGER
+    "%ld"
+    #else
+    "%d"
+    #endif  /* TYPES_64BIT_INTEGER */
+    ",\n", val_imax);
+
   (void) printf("val_u8 = %u,\n", (u32) val_u8);
   (void) printf("val_u16 = %hu,\n", val_u16);
   (void) printf("val_u32 = %u,\n", val_u32);
 
   #if defined TYPES_64BIT_INTEGER
-  (void) printf("val_u64 = %llu,\n", val_u64);
+  (void) printf("val_i64 = %ld,\n", val_i64);
+  (void) printf("val_u64 = %lu,\n", val_u64);
   #endif  /* TYPES_64BIT_INTEGER */
 
   (void) printf("val_umin = %u,\n", (u32) val_umin);
-  (void) printf("val_umax = %llu,\n", val_umax);
+
+  (void) printf(
+    "val_umax = "
+    #ifdef TYPES_64BIT_INTEGER
+    "%lu"
+    #else
+    "%u"
+    #endif  /* TYPES_64BIT_INTEGER */
+    ",\n", val_umax);
+
+  (void) printf(
+    "val_usize = "
+    #ifdef TYPES_64BIT_INTEGER
+    "%lu"
+    #else
+    "%u"
+    #endif  /* TYPES_64BIT_INTEGER */
+    ",\n", val_usize);
+
   (void) printf("val_byte = %u,\n", (u32) val_byte);
   (void) printf("val_charcode = %u,\n", val_charcode);
   (void) printf("val_f32 = %f,\n", (double) val_f32);
-  (void) printf("val_f64 = %lf,\n", val_f64);
+  (void) printf("val_f64 = %f,\n", val_f64);
   (void) printf("val_fmin = %f,\n", (double) val_fmin);
-  (void) printf("val_fmax = %lf,\n", val_fmax);
+  (void) printf("val_fmax = %f,\n", val_fmax);
 
   (void) printf("val_any: {\n");
-  (void) printf("\tval = %lld,\n", val_any.val);
+  (void) printf(
+    "\tval = "
+    #ifdef TYPES_64BIT_INTEGER
+    "%ld"
+    #else
+    "%d"
+    #endif  /* TYPES_64BIT_INTEGER */
+    ",\n", val_any.val);
   (void) printf("\tptr = %p\n", val_any.ptr);
 
   (void) printf(
@@ -187,18 +209,36 @@ int main(int argc, char **argv)
   (void) printf("\tval_i16 = %hd\n", val_any.val_i16);
   (void) printf("\tval_i32 = %d\n", val_any.val_i32);
   (void) printf("\tval_imin = %d\n", (i32) val_any.val_imin);
-  (void) printf("\tval_imax = %lld\n", val_any.val_imax);
+
+  (void) printf(
+    "\tval_imax = "
+    #ifdef TYPES_64BIT_INTEGER
+    "%ld"
+    #else
+    "%d"
+    #endif  /* TYPES_64BIT_INTEGER */
+    ",\n", val_any.val_imax);
+
   (void) printf("\tval_u8 = %u\n", (u32) val_any.val_u8);
   (void) printf("\tval_u16 = %hu\n", val_any.val_u16);
   (void) printf("\tval_u32 = %u\n", val_any.val_u32);
   (void) printf("\tval_umin = %u\n", (u32) val_any.val_umin);
-  (void) printf("\tval_umax = %llu\n", val_any.val_umax);
+
+  (void) printf(
+    "\tval_umax = "
+    #ifdef TYPES_64BIT_INTEGER
+    "%lu"
+    #else
+    "%u"
+    #endif  /* TYPES_64BIT_INTEGER */
+    ",\n", val_any.val_umax);
+
   (void) printf("\tval_byte = %u\n", (u32) val_any.val_byte);
   (void) printf("\tval_charcode = %u\n", val_any.val_charcode);
   (void) printf("\tval_f32 = %f\n", (double) val_any.val_f32);
-  (void) printf("\tval_f64 = %lf\n", val_any.val_f64);
+  (void) printf("\tval_f64 = %f\n", val_any.val_f64);
   (void) printf("\tval_fmin = %f\n", (double) val_any.val_fmin);
-  (void) printf("\tval_fmax = %lf\n", val_any.val_fmax);
+  (void) printf("\tval_fmax = %f\n", val_any.val_fmax);
   (void) printf("\tptr_bool = %p\n", (void *) val_any.ptr_bool);
   (void) printf("\tptr_i8 = %p\n", (void *) val_any.ptr_i8);
   (void) printf("\tptr_i16 = %p\n", (void *) val_any.ptr_i16);
@@ -216,10 +256,14 @@ int main(int argc, char **argv)
   (void) printf("\tptr_f64 = %p\n", (void *) val_any.ptr_f64);
   (void) printf("\tptr_fmin = %p\n", (void *) val_any.ptr_fmin);
   (void) printf("\tptr_fmax = %p\n", (void *) val_any.ptr_fmax);
-  (void) printf("\tval_i64 = %lld\n", val_any.val_i64);
-  (void) printf("\tval_u64 = %llu\n", val_any.val_u64);
+
+  #ifdef TYPES_64BIT_INTEGER
+  (void) printf("\tval_i64 = %ld\n", val_any.val_i64);
+  (void) printf("\tval_u64 = %lu\n", val_any.val_u64);
   (void) printf("\tptr_i64 = %p\n", (void *) val_any.ptr_i64);
   (void) printf("\tptr_u64 = %p\n", (void *) val_any.ptr_u64);
+  #endif  /* TYPES_64BIT_INTEGER */
+
   (void) printf("}\n");
 
   (void) printf("val_ptr = %p,\n", val_ptr);

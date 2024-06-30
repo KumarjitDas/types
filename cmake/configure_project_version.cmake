@@ -1,6 +1,6 @@
 # file: configure_project_version.cmake
 # author: Kumarjit Das
-# date: 2024-06-29
+# date: 2024-07-01
 # brief: TYPES library cmake project version configuration file.
 
 # BSD 2-Clause License

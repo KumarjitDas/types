@@ -1,6 +1,6 @@
 # file: set_compiler_flags.cmake
 # author: Kumarjit Das
-# date: 2024-06-29
+# date: 2024-07-01
 # brief: TYPES library cmake compiler flags configuration file.
 
 # BSD 2-Clause License

@@ -19,4 +19,4 @@ For more details, see the full [Changelog](CHANGELOG.md).
 ## Version Details
 
 - **First Release**: 1.0.0
-- **Release Date**: 2024-06-29
+- **Release Date**: 2024-07-01
