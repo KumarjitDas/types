@@ -37,32 +37,33 @@ write_status("Fetching external libraries.")
 
 set(_KDAPI_LIB_URL "https://github.com/KumarjitDas/kdapi/releases/download/v1.0.0/kdapi-1.0.0.zip")
 
-if(KDAPI_TARGET_OS STREQUAL "windows")
-  if(KDAPI_TARGET_ARCH STREQUAL "x64")
+if(TYPES_TARGET_OS STREQUAL "windows")
+  if(TYPES_TARGET_ARCH STREQUAL "x64")
     set(_KDAPI_LIB_URL "https://github.com/KumarjitDas/kdapi/releases/download/v1.0.0/kdapi-v1.0.0-windows-x64.zip")
-  elseif(KDAPI_TARGET_ARCH STREQUAL "x86")
+  elseif(TYPES_TARGET_ARCH STREQUAL "x86")
     set(_KDAPI_LIB_URL "https://github.com/KumarjitDas/kdapi/releases/download/v1.0.0/kdapi-v1.0.0-windows-x86.zip")
   endif()
-elseif(KDAPI_TARGET_OS STREQUAL "linux")
-  if(KDAPI_TARGET_ARCH STREQUAL "x64")
+elseif(TYPES_TARGET_OS STREQUAL "linux")
+  if(TYPES_TARGET_ARCH STREQUAL "x64")
     set(_KDAPI_LIB_URL "https://github.com/KumarjitDas/kdapi/releases/download/v1.0.0/kdapi-v1.0.0-linux-x64.zip")
-  elseif(KDAPI_TARGET_ARCH STREQUAL "x86")
+  elseif(TYPES_TARGET_ARCH STREQUAL "x86")
     set(_KDAPI_LIB_URL "https://github.com/KumarjitDas/kdapi/releases/download/v1.0.0/kdapi-v1.0.0-linux-x86.zip")
   endif()
 endif()
 
-FetchContent_Declare(kdapi
+FetchContent_Declare(
+  kdapi
   URL                        ${_KDAPI_LIB_URL}
   SOURCE_DIR                 ${CMAKE_BINARY_DIR}/external/kdapi
   DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
-
 FetchContent_MakeAvailable(kdapi)
 
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/external/kdapi/lib/cmake")
-set(kdapi_DIR "${CMAKE_BINARY_DIR}/external/kdapi/lib/cmake")
+set(KDAPI_CMAKE_DIR "${CMAKE_BINARY_DIR}/external/kdapi/lib/cmake")
+list(APPEND CMAKE_PREFIX_PATH ${KDAPI_CMAKE_DIR})
 
 find_package(kdapi 1.0.0 REQUIRED)
+
 include_directories(${KDAPI_INCLUDE_DIR})
 
 write_status("Library include directories added: ${KDAPI_INCLUDE_DIR}")

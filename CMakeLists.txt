@@ -36,9 +36,9 @@ cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 include("CMake/setup_project.cmake")
 
 # Setting the project name, version, and other descriptions
-project(${KDAPI_PROJECT_NAME}
-  VERSION      "${${KDAPI_LIBRARY_NAME_UPPER}_VERSION}"
-  DESCRIPTION  "${${KDAPI_PROJECT_NAME_UPPER}_DESCRIPTION}"
+project(${TYPES_PROJECT_NAME}
+  VERSION      "${${TYPES_LIBRARY_NAME_UPPER}_VERSION}"
+  DESCRIPTION  "${${TYPES_PROJECT_NAME_UPPER}_DESCRIPTION}"
   HOMEPAGE_URL "https://github.com/KumarjitDas/types.git"
   LANGUAGES    "C")
 

@@ -39,10 +39,40 @@
 
 int main(int argc, char **argv)
 {
+  bool val_bool;
+  i8 val_i8;
+  i16 val_i16;
+  i32 val_i32;
+
+  #if defined TYPES_64BIT_INTEGER
+  i64 val_i64;
+  #endif  /* TYPES_64BIT_INTEGER */
+
+  imin val_imin;
+  imax val_imax;
+  u8 val_u8;
+  u16 val_u16;
+  u32 val_u32;
+
+  #if defined TYPES_64BIT_INTEGER
+  u64 val_u64;
+  #endif  /* TYPES_64BIT_INTEGER */
+
+  umin val_umin;
+  umax val_umax;
+  byte val_byte;
+  charcode val_charcode;
+  f32 val_f32;
+  f64 val_f64;
+  fmin val_fmin;
+  fmax val_fmax;
+  any val_any;
+  void *val_ptr;
+
   (void) argc;
   (void) argv;
 
-  (void) printf("TYPES test :: begin\n");
+  (void) printf("TYPES example :: begin\n");
 
   (void) printf("\nSizes of types:\n\n");
 
@@ -78,35 +108,35 @@ int main(int argc, char **argv)
 
   (void) printf("\nValues of types:\n\n");
 
-  bool val_bool = true;
-  i8 val_i8 = MAX_I8;
-  i16 val_i16 = MAX_I16;
-  i32 val_i32 = MAX_I32;
+  val_bool = true;
+  val_i8 = MAX_I8;
+  val_i16 = MAX_I16;
+  val_i32 = MAX_I32;
 
   #if defined TYPES_64BIT_INTEGER
-  i64 val_i64 = MAX_I64;
+  val_i64 = MAX_I64;
   #endif  /* TYPES_64BIT_INTEGER */
 
-  imin val_imin = MAX_IMIN;
-  imax val_imax = MAX_IMAX;
-  u8 val_u8 = MAX_U8;
-  u16 val_u16 = MAX_U16;
-  u32 val_u32 = MAX_U32;
+  val_imin = MAX_IMIN;
+  val_imax = MAX_IMAX;
+  val_u8 = MAX_U8;
+  val_u16 = MAX_U16;
+  val_u32 = MAX_U32;
 
   #if defined TYPES_64BIT_INTEGER
-  u64 val_u64 = MAX_U64;
+  val_u64 = MAX_U64;
   #endif  /* TYPES_64BIT_INTEGER */
 
-  umin val_umin = MAX_UMIN;
-  umax val_umax = MAX_UMAX;
-  byte val_byte = MAX_BYTE;
-  charcode val_charcode = MAX_CHARCODE;
-  f32 val_f32 = MAX_F32;
-  f64 val_f64 = MAX_F64;
-  fmin val_fmin = MAX_FMIN;
-  fmax val_fmax = MAX_FMAX;
-  any val_any = { .val_umax = MAX_ANY };
-  void *val_ptr = MAX_PTR;
+  val_umin = MAX_UMIN;
+  val_umax = MAX_UMAX;
+  val_byte = MAX_BYTE;
+  val_charcode = MAX_CHARCODE;
+  val_f32 = MAX_F32;
+  val_f64 = MAX_F64;
+  val_fmin = MAX_FMIN;
+  val_fmax = MAX_FMAX;
+  val_any.val_umax = MAX_ANY;
+  val_ptr = MAX_PTR;
 
   (void) printf("val_bool = %s,\n", val_bool ? "TRUE" : "FALSE");
   (void) printf("val_i8 = %d,\n", (i32) val_i8);
@@ -194,7 +224,7 @@ int main(int argc, char **argv)
 
   (void) printf("val_ptr = %p,\n", val_ptr);
 
-  (void) printf("\nTYPES test :: end\n");
+  (void) printf("\nTYPES example :: end\n");
 
   return 0;
 }

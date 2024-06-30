@@ -40,14 +40,14 @@ set(GCC_WARNINGS ${CLANG_WARNINGS} -Wmisleading-indentation -Wduplicated-cond -W
 
 # Setting compiler warnings to the main target
 if(MSVC)
-  target_compile_options(${KDAPI_LIBRARY_NAME} INTERFACE ${MSVC_WARNINGS})
+  target_compile_options(${TYPES_LIBRARY_NAME} INTERFACE ${MSVC_WARNINGS})
   write_status("Setting compiler warnings for MSVC.")
 elseif(CMAKE_C_COMPILER_ID MATCHES ".*Clang")
-  target_compile_options(${KDAPI_LIBRARY_NAME} INTERFACE ${CLANG_WARNINGS})
+  target_compile_options(${TYPES_LIBRARY_NAME} INTERFACE ${CLANG_WARNINGS})
   write_status("Setting compiler warnings for Clang.")
 elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
-  target_compile_options(${KDAPI_LIBRARY_NAME} INTERFACE ${GCC_WARNINGS})
+  target_compile_options(${TYPES_LIBRARY_NAME} INTERFACE ${GCC_WARNINGS})
   write_status("Setting compiler warnings for GNU.")
 else()
-  message(AUTHOR_WARNING "No compiler warnings set for ${KDAPI_LIBRARY_NAME}")
+  message(AUTHOR_WARNING "No compiler warnings set for ${TYPES_LIBRARY_NAME}")
 endif()

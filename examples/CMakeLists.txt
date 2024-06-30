@@ -47,22 +47,22 @@ endforeach()
 # Loop through each item in the examples list
 foreach(EXAMPLE_ITEM ${EXAMPLE_LIST})
   # Attaching library name in front of example item
-  set(EXAMPLE_TARGET "${KDAPI_PROJECT_NAME_LOWER}-${EXAMPLE_ITEM}")
+  set(EXAMPLE_TARGET "${TYPES_PROJECT_NAME_LOWER}-${EXAMPLE_ITEM}")
 
   # Build an executable from the `EXAMPLE_ITEM` source
   add_executable(${EXAMPLE_TARGET} "${EXAMPLE_ITEM}.c")
 
   # Link the built executable with the main library
-  target_link_libraries(${EXAMPLE_TARGET} PRIVATE "KDAPI::${KDAPI_LIBRARY_NAME}")
+  target_link_libraries(${EXAMPLE_TARGET} PRIVATE "KDAPI::${TYPES_LIBRARY_NAME}")
 
   # Setting build postfixes for different build configurations
   set_target_properties(
     ${EXAMPLE_TARGET}      PROPERTIES
-#    C_STANDARD             90
-    DEBUG_POSTFIX          "${KDAPI_STATIC_POSTFIX}-d"
-    RELEASE_POSTFIX        "${KDAPI_STATIC_POSTFIX}"
-    MINSIZEREL_POSTFIX     "${KDAPI_STATIC_POSTFIX}-mr"
-    RELWITHDEBINFO_POSTFIX "${KDAPI_STATIC_POSTFIX}-rd"
+    C_STANDARD             90
+    DEBUG_POSTFIX          "${TYPES_STATIC_POSTFIX}-d"
+    RELEASE_POSTFIX        "${TYPES_STATIC_POSTFIX}"
+    MINSIZEREL_POSTFIX     "${TYPES_STATIC_POSTFIX}-mr"
+    RELWITHDEBINFO_POSTFIX "${TYPES_STATIC_POSTFIX}-rd"
   )
 
   # Check if the project builds shared libraries

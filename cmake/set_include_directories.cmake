@@ -35,7 +35,7 @@ set(RELATIVE_INCLUDE_DIR_PATH "." CACHE PATH
   "Public include directories of this project.")
 
 target_include_directories(
-  ${KDAPI_LIBRARY_NAME} INTERFACE
+  ${TYPES_LIBRARY_NAME} INTERFACE
 
   # Adding include directory for public inclusion
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${RELATIVE_INCLUDE_DIR_PATH}>
@@ -49,3 +49,6 @@ target_include_directories(
 )
 
 write_status("Setting public include directory: ${CMAKE_CURRENT_SOURCE_DIR}/${RELATIVE_INCLUDE_DIR_PATH}")
+
+# Include kdapi include directories
+install(DIRECTORY ${KDAPI_INCLUDE_DIR} DESTINATION "${TYPES_INSTALL_DIR_NAME}")

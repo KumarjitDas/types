@@ -31,10 +31,10 @@
 
 
 # Adding the main library
-add_library(${KDAPI_LIBRARY_NAME} INTERFACE "")
-target_link_libraries(${KDAPI_LIBRARY_NAME} INTERFACE KDAPI::kdapi)
-write_status("Creating library: ${KDAPI_LIBRARY_NAME}.")
+add_library(${TYPES_LIBRARY_NAME} INTERFACE "")
+target_link_libraries(${TYPES_LIBRARY_NAME} INTERFACE KDAPI::kdapi)
+write_status("Creating library: ${TYPES_LIBRARY_NAME}.")
 
 # Setting an alias in `TYPES` namespace
-add_library("KDAPI::${KDAPI_LIBRARY_NAME}" ALIAS ${KDAPI_LIBRARY_NAME})
-write_status("Adding alias to the library: KDAPI::${KDAPI_LIBRARY_NAME}.")
+add_library("KDAPI::${TYPES_LIBRARY_NAME}" ALIAS ${TYPES_LIBRARY_NAME})
+write_status("Adding alias to the library: KDAPI::${TYPES_LIBRARY_NAME}.")
