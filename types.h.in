@@ -1,7 +1,7 @@
 /**
  * @file types.h
  * @author Kumarjit Das
- * @date 2024-07-01
+ * @date 2024-07-02
  * @version @TYPES_VERSION_MAJOR@.@TYPES_VERSION_MINOR@.@TYPES_VERSION_PATCH@
  * @brief A simple, header-only C library designed to provide types with sizes.
  */
@@ -69,8 +69,8 @@
 typedef __int64                 kd_types__type_i64_;
 typedef unsigned __int64        kd_types__type_u64_;
 
-  #define TYPES_I64(x)          ((kd_types__type_i64_)x##LL)
-  #define TYPES_U64(x)          ((kd_types__type_u64_)x##ULL)
+  #define TYPES_I64(x)          ((kd_types__type_i64_)(x##LL))
+  #define TYPES_U64(x)          ((kd_types__type_u64_)(x##ULL))
 #elif defined __GNUC__ || defined __MWERKS__ || defined __SUNPRO_C || defined __SUNPRO_CC || defined __APPLE_CC__ || defined KD_OS_IRIX || defined _LONG_LONG || defined _CRAYC
   #if __SIZEOF_LONG__ == 8
     #define TYPES_64BIT_INTEGER 1
@@ -87,8 +87,8 @@ typedef unsigned long           kd_types__type_u64_;
 typedef long                    kd_types__type_i64_;
 typedef unsigned long           kd_types__type_u64_;
 
-  #define TYPES_I64(x)          ((kd_types__type_i64_)x)
-  #define TYPES_U64(x)          ((kd_types__type_u64_)x)
+  #define TYPES_I64(x)          ((kd_types__type_i64_)(x))
+  #define TYPES_U64(x)          ((kd_types__type_u64_)(x))
 #endif
 
 #if !defined TYPES_64BIT_INTEGER
@@ -107,16 +107,16 @@ typedef unsigned long           kd_types__type_u64_;
 #if defined __MINGW32__ && defined TYPES_64BIT_INTEGER
   #undef TYPES_I64
   #undef TYPES_U64
-  #define TYPES_I64(x)          ((kd_types__type_i64_)x##LL)
-  #define TYPES_U64(x)          ((kd_types__type_u64_)x##LLU)
+  #define TYPES_I64(x)          ((kd_types__type_i64_)(x##LL))
+  #define TYPES_U64(x)          ((kd_types__type_u64_)(x##LLU))
 #endif  /* __MINGW32__ */
 
 #if defined TYPES_32BIT_INTEGER
-  #define TYPES_I32(x)          x
-  #define TYPES_U32(x)          x##U
+  #define TYPES_I32(x)          (x)
+  #define TYPES_U32(x)          (x##U)
 #else
-  #define TYPES_I32(x)          x
-  #define TYPES_U32(x)          x
+  #define TYPES_I32(x)          (x)
+  #define TYPES_U32(x)          (x)
 #endif
 
 
@@ -150,29 +150,23 @@ typedef unsigned long           kd_types__type_u64_;
  */
 
 #define TYPES_DEFINED_TYPE_BOOL     1
-
 #define TYPES_DEFINED_TYPE_I8       1
 #define TYPES_DEFINED_TYPE_I16      1
 #define TYPES_DEFINED_TYPE_I32      1
 #define TYPES_DEFINED_TYPE_IMIN     1
 #define TYPES_DEFINED_TYPE_IMAX     1
-
 #define TYPES_DEFINED_TYPE_U8       1
 #define TYPES_DEFINED_TYPE_U16      1
 #define TYPES_DEFINED_TYPE_U32      1
 #define TYPES_DEFINED_TYPE_UMIN     1
 #define TYPES_DEFINED_TYPE_UMAX     1
-
 #define TYPES_DEFINED_TYPE_USIZE    1
-
 #define TYPES_DEFINED_TYPE_BYTE     1
 #define TYPES_DEFINED_TYPE_CHARCODE 1
-
 #define TYPES_DEFINED_TYPE_F32      1
 #define TYPES_DEFINED_TYPE_F64      1
 #define TYPES_DEFINED_TYPE_FMIN     1
 #define TYPES_DEFINED_TYPE_FMAX     1
-
 #define TYPES_DEFINED_TYPE_ANY      1
 
 #if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
@@ -229,21 +223,21 @@ typedef unsigned int              u32;
 #if defined TYPES_64BIT_INTEGER
 typedef kd_types__type_i64_       i64;
 typedef i64                       imax;
-
 typedef kd_types__type_u64_       u64;
 typedef u64                       umax;
+typedef u64                       usize;
 #elif defined TYPES_PRETEND_64BIT_INTEGER
 typedef i32                       i64;
 typedef i64                       imax;
-
 typedef u32                       u64;
 typedef u64                       umax;
+typedef u64                       usize;
 #else
 typedef i32                       imax;
 typedef u32                       umax;
+typedef u32                       usize;
 #endif  /* TYPES_64BIT_INTEGER */
 
-typedef umax                      usize;
 typedef u8                        byte;
 typedef u32                       charcode;
 typedef float                     f32;
@@ -256,50 +250,38 @@ union kd_types__type_any_
   imax                val;
   kd_types__type_ptr_ ptr;
   byte                slice[sizeof(imax)];
-
   bool                val_bool;
-
   i8                  val_i8;
   i16                 val_i16;
   i32                 val_i32;
   imin                val_imin;
   imax                val_imax;
-
   u8                  val_u8;
   u16                 val_u16;
   u32                 val_u32;
   umin                val_umin;
   umax                val_umax;
-
   usize               val_usize;
-
   byte                val_byte;
   charcode            val_charcode;
-
   f32                 val_f32;
   f64                 val_f64;
   fmin                val_fmin;
   fmax                val_fmax;
-
   bool*               ptr_bool;
-
   i8*                 ptr_i8;
   i16*                ptr_i16;
   i32*                ptr_i32;
   imin*               ptr_imin;
   imax*               ptr_imax;
-
   u8*                 ptr_u8;
   u16*                ptr_u16;
   u32*                ptr_u32;
   umin*               ptr_umin;
   umax*               ptr_umax;
-
   usize*              ptr_usize;
-
   byte*               ptr_byte;
   charcode*           ptr_charcode;
-
   f32*                ptr_f32;
   f64*                ptr_f64;
   fmin*               ptr_fmin;
@@ -308,7 +290,6 @@ union kd_types__type_any_
   #if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
   i64                 val_i64;
   u64                 val_u64;
-
   i64*                ptr_i64;
   u64*                ptr_u64;
   #endif  /* TYPES_64BIT_INTEGER */
@@ -325,21 +306,23 @@ typedef union kd_types__type_any_ any;
 
 #define MIN_I8       (-128)
 #define MIN_I16      (-32768)
-#define MIN_I32      TYPES_I32(-2147483648)
-#define MIN_IMIN     TYPES_I32(MIN_I8)
+#define MIN_I32      (TYPES_I32(-2147483647) - TYPES_I32(1))
+#define MIN_IMIN     TYPES_I32(-128)
 #define MIN_U8       0
 #define MIN_U16      0
 #define MIN_U32      TYPES_U32(0)
-#define MIN_UMIN     TYPES_U32(MIN_U8)
+#define MIN_UMIN     TYPES_U32(0)
 #define MIN_BYTE     0
 #define MIN_CHARCODE 0
-#define MIN_F32      (-1.1754941E-38f)
-#define MIN_F64      (-2.2250738585072014E-308)
+#define MIN_F32      (-1.175494071E-38F)
+#define MIN_F64      (-2.22507385850720139E-308)
+#define MIN_FMIN     MIN_F32
+#define MIN_FMAX     MIN_F64
 #define MIN_ANY      0
 #define MIN_PTR      ((kd_types__type_ptr_)0)
 
 #if defined TYPES_64BIT_INTEGER
-  #define MIN_I64    TYPES_I64(-9223372036854775808)
+  #define MIN_I64    (TYPES_I64(-9223372036854775807) - TYPES_I64(-1))
   #define MIN_IMAX   MIN_I64
   #define MIN_U64    TYPES_I64(0)
   #define MIN_UMAX   MIN_U64
@@ -366,17 +349,35 @@ typedef union kd_types__type_any_ any;
 #define MAX_I8       127
 #define MAX_I16      32767
 #define MAX_I32      TYPES_I32(2147483647)
-#define MAX_IMIN     MAX_I8
+#define MAX_IMIN     TYPES_I32(127)
 #define MAX_U8       255
 #define MAX_U16      65535
 #define MAX_U32      TYPES_U32(4294967295)
-#define MAX_UMIN     MAX_U8
+#define MAX_UMIN     TYPES_U32(255)
 #define MAX_BYTE     MAX_U8
 #define MAX_CHARCODE MAX_U32
-#define MAX_F32      3.4E+38F
-#define MAX_F64      1.7E+308
+#define MAX_F32      3.402823466E+38F
+#define MAX_F64      1.79769313486231571E+308
 #define MAX_FMIN     MAX_F32
 #define MAX_FMAX     MAX_F64
+
+#if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
+  #define MAX_ANY    MAX_UMAX
+#elif TYPES_64BIT_POINTER
+  #define MAX_ANY    MAX_PTR
+#else
+  #define MAX_ANY    MAX_U32
+#endif  /* TYPES_64BIT_INTEGER */
+
+#if defined TYPES_64BIT_POINTER
+  #if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
+    #define MAX_PTR  ((kd_types__type_ptr_)MAX_U64)
+  #else
+    #define MAX_PTR  ((kd_types__type_ptr_)0xFFFFFFFFFFFFFFFF)
+  #endif  /* TYPES_64BIT_INTEGER */
+#else
+  #define MAX_PTR    ((kd_types__type_ptr_)MAX_U32)
+#endif  /* TYPES_64BIT_POINTER */
 
 #if defined TYPES_64BIT_INTEGER
   #define MAX_I64    TYPES_I64(9223372036854775807)
@@ -394,24 +395,6 @@ typedef union kd_types__type_any_ any;
   #define MAX_IMAX   MAX_I32
   #define MAX_UMAX   MAX_U32
   #define MAX_USIZE  MAX_U32
-#endif  /* TYPES_64BIT_INTEGER */
-
-#if defined TYPES_64BIT_POINTER
-  #if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
-    #define MAX_PTR  ((kd_types__type_ptr_)MAX_U64)
-  #else
-    #define MAX_PTR  ((kd_types__type_ptr_)0xFFFFFFFFFFFFFFFF)
-  #endif  /* TYPES_64BIT_INTEGER */
-#else
-  #define MAX_PTR    ((kd_types__type_ptr_)MAX_U32)
-#endif  /* TYPES_64BIT_POINTER */
-
-#if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
-  #define MAX_ANY    MAX_UMAX
-#elif TYPES_64BIT_POINTER
-  #define MAX_ANY    MAX_PTR
-#else
-  #define MAX_ANY    MAX_U32
 #endif  /* TYPES_64BIT_INTEGER */
 
 
@@ -455,8 +438,8 @@ typedef union kd_types__type_any_ any;
 #define SZ_ANY      sizeof(any)
 #define SZ_PTR      sizeof(kd_types__type_ptr_)
 #if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
-  #define SZ_I64    ((i32) sizeof(i64))
-  #define SZ_U64    ((i32) sizeof(u64))
+  #define SZ_I64    sizeof(i64)
+  #define SZ_U64    sizeof(u64)
 #endif
 
 
