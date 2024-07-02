@@ -1,7 +1,7 @@
 
 # TYPES
 
-TYPES is a simple, header-only C library designed to provide compile-time system information. This project targets both Windows and GNU/Linux (32-bit and 64-bit) platforms. The library aims to help developers easily retrieve details about the compiler, target operating system, target CPU, and endianness at compile-time.
+TYPES is a simple, header-only C library designed to provide types with sizes. This project targets both Windows and GNU/Linux (32-bit and 64-bit) platforms. The library aims to help developers easily specify the size of a type instead of relying on the compiler/OS/CPU architecture and macros.
 
 ## Table of Contents
 
@@ -21,12 +21,32 @@ TYPES is a simple, header-only C library designed to provide compile-time system
 
 ## Features
 
-- Detects compiler type and version.
-- Identifies the target operating system.
-- Determines the target CPU architecture.
-- Checks system endianness.
-- Provides macros for import-export signatures, calling conventions, and extern indicators.
-- CMake target for ease of use with other CMake projects.
+1. **Type Definitions**
+   - Added comprehensive type definitions:
+     - Boolean: `bool`
+     - Signed integers: `i8`, `i16`, `i32`, `i64`, `imin`, `imax`
+     - Unsigned integers: `u8`, `u16`, `u32`, `u64`, `umin`, `umax`, `usize`
+     - Other types: `byte`, `charcode`
+     - Floating points: `f32`, `f64`, `fmin`, `fmax`
+     - General purpose: `any`
+     - 
+2. **Type Pretend Macros**
+   - `TYPES_PRETEND_64BIT_INTEGER`: Makes 64-bit types act as 32-bit types for compatibility purposes.
+
+3. **Type Definition Checks**
+   - `TYPES_DEFINED_TYPE_<TYPE_NAME>`: Checks if a type is defined in the current environment.
+   - `TYPES_DEFINED_TYPEVAL_<VALUE_NAME>`: Checks if a constant value of a type is defined.
+
+4. **Integer and Pointer Size Checks**
+   - `TYPES_64BIT_INTEGER`: Checks if the compiler, OS, and CPU support 64-bit integers.
+   - `TYPES_32BIT_INTEGER`: Checks if the compiler, OS, and CPU support 32-bit integers.
+   - `TYPES_64BIT_POINTER`: Checks if the compiler, OS, and CPU support 64-bit pointers.
+   - `TYPES_32BIT_POINTER`: Checks if the compiler, OS, and CPU support 32-bit pointers.
+
+5. **Type Boundaries and Sizes**
+   - `MIN_<TYPE_NAME>`: Macro to get the minimum value of a type.
+   - `MAX_<TYPE_NAME>`: Macro to get the maximum value of a type.
+   - `SZ_<TYPE_NAME>`: Macro to get the size of a type.
 
 ## Installation
 
@@ -80,10 +100,10 @@ To get started with this project, download and install the following.
 
 ## Usage
 
-Include the `kdapi.h` header file in your C project to use TYPES.
+Include the `types.h` header file in your C project to use TYPES.
 
 ```c
-#include "kdapi.h"
+#include "types.h"
 ```
 
 ### Example
@@ -92,20 +112,15 @@ An example usage of TYPES can be found in the `test.c` file.
 
 ```c
 #include <stdio.h>
-#include "kdapi.h"
+#include "types.h"
 
 int main() {
-    printf("TYPES Version: %s\n", KD_VERSION_STR);
+    printf("TYPES Version: %s\n", TYPES_VERSION_STR);
     
-    printf("Current OS: %s\n",
-    #ifdef KD_OS_LINUX
-           "Linux"
-    #elif KD_OS_WINDOWS
-           "Windows"
-    #else
-           "Unknown"
-    #endif
-    );
+    i8 val8i = 128;
+    u32 val32u = 654321;
+    
+    printf("val8i: %d,  val32u = %u\n", (int) val8i, val32u);
     
     return 0;
 }
@@ -123,7 +138,7 @@ The list of features and functions implemented till now is given in [Project Sta
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
 contributions you make are greatly appreciated.
 
-- Fork this project \[[kdapi](https://github.com/KumarjitDas/types)\]
+- Fork this project \[[types](https://github.com/KumarjitDas/types)\]
 - Create your *Feature Branch*
 
   ```sh
@@ -151,14 +166,27 @@ The TYPES project follows a consistent naming convention to ensure readability a
 - **Macro Names**: Macro names are written in uppercase letters with underscores separating words. They typically start with the prefix `KD_`.
   - Examples: `KD_COMPILER_GCC`, `KD_OS_LINUX`, `KD_CPU_X86_64`, `KD_VERSION_MAJOR`
 
-- **Function-Like Macros**: Function-like macros also follow the uppercase with underscores convention and use parentheses to indicate parameters.
-  - Examples: `KD_EXTERN_BEGIN`, `KD_EXTERN_END`
+- **Macro Definitions:**
+  - Macro names are written in uppercase letters. They typically start with the prefix `TYPES_`.
+  - Words are separated by underscores (`_`).
+  - Example: `TYPES_VERSION_MAJOR`, `TYPES_DEFINED_TYPE_BOOL`.
 
-- **Constants**: Constants are defined using uppercase letters with underscores and often include a descriptive name or version number.
-  - Examples: `KD_VERSION_STR`, `KD_VERSION_MAJOR`
+- **Type Definitions:**
+  - Type names are in lowercase.
+  - Use of prefixes for type groups, such as `kd_types__type_` for internal types.
+  - Example: `kd_types__type_i64_`, `bool`, `i8`.
 
-- **File Names**: File names are in lowercase and use underscores to separate words.
-  - Examples: `kdapi.h`, `test.c`, `setup_env.sh`
+- **Enums:**
+  - Enum names follow a similar lowercase pattern, with names indicating boolean values.
+  - Example: `kd_types__type_bool_` with values `false` and `true`.
+
+- **Function-like Macros:**
+  - Macros that behave like functions are in uppercase with parameters in parentheses.
+  - Example: `TYPES_I64(x)`, `TYPES_U32(x)`.
+
+- **Constant Values:**
+  - Constants follow the uppercase convention and often include type indications.
+  - Example: `MIN_I8`, `MAX_I32`, `SZ_BOOL`.
 
 ## License
 
@@ -168,15 +196,19 @@ This project is distributed under the **BSD 2-Clause License**. See [LICENSE](LI
 
 List of functionalities/features implemented so far:
 
-- **Compiler Detection**: Macros for various compilers (Intel, GCC, LLVM, etc.).
-- **OS Identification**: Macros for target operating systems (Linux, Windows, etc.).
-- **CPU Architecture Detection**: Macros for target CPU architectures (x86, x64, ARM, etc.).
-- **Endianness Determination**: Macros for little-endian and big-endian.
-- **DLL Handling**: Import-export macros for DLLs.
-- **Calling Conventions**: Macros for cdecl, stdcall, fastcall.
+- **Type definitions**: `bool`, `i8`, `i16`, `i32`, `i64`, `imin`, `imax`, `u8`, `u16`, `u32`, `u64`, `umin`, `umax`, `usize`, `byte`, `charcode`, `f32`, `f64`, `fmin`, `fmax`, and `any`.
+- **Macro `TYPES_PRETEND_64BIT_INTEGER`**: Makes 64-bit types act as 32-bit types.
+- **Macro `TYPES_DEFINED_TYPE_<TYPE_NAME>`**: Checks if a type is defined.
+- **Macro `TYPES_DEFINED_TYPEVAL_<VALUE_NAME>`**: Checks if a constant value of a type is defined.
+- **Macro `TYPES_64BIT_INTEGER`**: Checks if the compiler, OS, and CPU support 64-bit integers.
+- **Macro `TYPES_32BIT_INTEGER`**: Checks if the compiler, OS, and CPU support 32-bit integers.
+- **Macro `TYPES_64BIT_POINTER`**: Checks if the compiler, OS, and CPU support 64-bit pointers.
+- **Macro `TYPES_32BIT_POINTER`**: Checks if the compiler, OS, and CPU support 32-bit pointers.
+- **Macro `MIN_<TYPE_NAME>`**: Gets the minimum value of a type.
+- **Macro `MAX_<TYPE_NAME>`**: Gets the maximum value of a type.
+- **Macro `SZ_<TYPE_NAME>`**: Gets the size of a type.
 - **Build Configuration**: CMake configuration files for shared and static builds.
 - **Example Program**: [Example](examples/example.c) demonstrating library usage.
-
 
 ## Acknowledgment
 

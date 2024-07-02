@@ -34,7 +34,6 @@
 
 
 #include <stdio.h>
-#include <stdint.h>
 #include "types.h"
 
 
@@ -107,17 +106,32 @@ int main(int argc, char **argv)
   (void) printf("MIN_I16 = %d,\n", (int) MIN_I16);
   (void) printf("MIN_I32 = %ld,\n", (long) MIN_I32);
   (void) printf("MIN_IMIN = %d,\n", (int) MIN_IMIN);
+
+  #ifdef KD_COMP_MSVC
+  (void) printf("MIN_IMAX = %lld,\n", (long long) MIN_IMAX);
+  #else
   (void) printf("MIN_IMAX = %ld,\n", (long) MIN_IMAX);
+  #endif  /* KD_COMP_MSVC */
+
   (void) printf("MIN_U8 = %u,\n", (unsigned int) MIN_U8);
   (void) printf("MIN_U16 = %u,\n", (unsigned int) MIN_U16);
   (void) printf("MIN_U32 = %lu,\n", (unsigned long) MIN_U32);
   (void) printf("MIN_UMIN = %u,\n", (unsigned int) MIN_UMIN);
   (void) printf("MIN_UMAX = %lu,\n", (unsigned long) MIN_UMAX);
 
-#if defined TYPES_64BIT_INTEGER
+  #if defined TYPES_64BIT_INTEGER
+    #ifdef KD_COMP_MSVC
+  (void) printf("MIN_I64 = %lld,\n", (long long) MIN_I64);
+    #else
   (void) printf("MIN_I64 = %ld,\n", (long) MIN_I64);
+    #endif  /* KD_COMP_MSVC */
+
+    #ifdef KD_COMP_MSVC
+  (void) printf("MIN_U64 = %llu,\n", (unsigned long long) MIN_U64);
+    #else
   (void) printf("MIN_U64 = %lu,\n", (unsigned long) MIN_U64);
-#endif  /* TYPES_64BIT_INTEGER */
+    #endif  /* KD_COMP_MSVC */
+  #endif  /* TYPES_64BIT_INTEGER */
 
   (void) printf("MIN_USIZE = %lu,\n", (unsigned long) MIN_USIZE);
   (void) printf("MIN_BYTE = %d,\n", (int) MIN_BYTE);
@@ -135,26 +149,57 @@ int main(int argc, char **argv)
   (void) printf("MAX_I16 = %d,\n", (int) MAX_I16);
   (void) printf("MAX_I32 = %ld,\n", (long) MAX_I32);
   (void) printf("MAX_IMIN = %d,\n", (int) MAX_IMIN);
+
+  #ifdef KD_COMP_MSVC
+  (void) printf("MAX_IMAX = %lld,\n", (long long) MAX_IMAX);
+  #else
   (void) printf("MAX_IMAX = %ld,\n", (long) MAX_IMAX);
+  #endif  /* KD_COMP_MSVC */
+
   (void) printf("MAX_U8 = %u,\n", (unsigned int) MAX_U8);
   (void) printf("MAX_U16 = %u,\n", (unsigned int) MAX_U16);
   (void) printf("MAX_U32 = %lu,\n", (unsigned long) MAX_U32);
   (void) printf("MAX_UMIN = %u,\n", (unsigned int) MAX_UMIN);
+
+  #ifdef KD_COMP_MSVC
+  (void) printf("MAX_UMAX = %llu,\n", (unsigned long long) MAX_UMAX);
+  #else
   (void) printf("MAX_UMAX = %lu,\n", (unsigned long) MAX_UMAX);
+  #endif  /* KD_COMP_MSVC */
 
-#if defined TYPES_64BIT_INTEGER
+  #if defined TYPES_64BIT_INTEGER
+    #ifdef KD_COMP_MSVC
+  (void) printf("MAX_I64 = %lld,\n", (long long) MAX_I64);
+    #else
   (void) printf("MAX_I64 = %ld,\n", (long) MAX_I64);
-  (void) printf("MAX_U64 = %lu,\n", (unsigned long) MAX_U64);
-#endif  /* TYPES_64BIT_INTEGER */
+    #endif  /* KD_COMP_MSVC */
 
+    #ifdef KD_COMP_MSVC
+  (void) printf("MAX_U64 = %llu,\n", (unsigned long long) MAX_U64);
+    #else
+  (void) printf("MAX_U64 = %lu,\n", (unsigned long) MAX_U64);
+    #endif  /* KD_COMP_MSVC */
+  #endif  /* TYPES_64BIT_INTEGER */
+
+  #ifdef KD_COMP_MSVC
+  (void) printf("MAX_USIZE = %llu,\n", (unsigned long long) MAX_USIZE);
+  #else
   (void) printf("MAX_USIZE = %lu,\n", (unsigned long) MAX_USIZE);
+  #endif  /* KD_COMP_MSVC */
+
   (void) printf("MAX_BYTE = %d,\n", (int) MAX_BYTE);
   (void) printf("MAX_CHARCODE = %lu,\n", (unsigned long) MAX_CHARCODE);
   (void) printf("MAX_F32 = %.9e,\n", (double) MAX_F32);
   (void) printf("MAX_F64 = %.17e,\n", MAX_F64);
   (void) printf("MAX_FMIN = %.9e,\n", (double) MAX_FMIN);
   (void) printf("MAX_FMAX = %.17e,\n", MAX_FMAX);
+
+  #ifdef KD_COMP_MSVC
+  (void) printf("MAX_ANY = %llu,\n", (unsigned long long) MAX_ANY);
+  #else
   (void) printf("MAX_ANY = %lu,\n", (unsigned long) MAX_ANY);
+  #endif  /* KD_COMP_MSVC */
+
   (void) printf("MAX_PTR = %p,\n", MAX_PTR);
 
   (void) printf("\nValues of constant values:\n\n");
@@ -201,7 +246,11 @@ int main(int argc, char **argv)
   (void) printf(
     "val_imax = "
     #ifdef TYPES_64BIT_INTEGER
+      #ifdef KD_COMP_MSVC
+    "%lld"
+      #else
     "%ld"
+      #endif  /* KD_COMP_MSVC */
     #else
     "%d"
     #endif  /* TYPES_64BIT_INTEGER */
@@ -212,8 +261,13 @@ int main(int argc, char **argv)
   (void) printf("val_u32 = %u,\n", val_u32);
 
   #if defined TYPES_64BIT_INTEGER
+    #ifdef KD_COMP_MSVC
+  (void) printf("val_i64 = %lld,\n", val_i64);
+  (void) printf("val_u64 = %llu,\n", val_u64);
+    #else
   (void) printf("val_i64 = %ld,\n", val_i64);
   (void) printf("val_u64 = %lu,\n", val_u64);
+    #endif  /* KD_COMP_MSVC */
   #endif  /* TYPES_64BIT_INTEGER */
 
   (void) printf("val_umin = %u,\n", (u32) val_umin);
@@ -221,7 +275,11 @@ int main(int argc, char **argv)
   (void) printf(
     "val_umax = "
     #ifdef TYPES_64BIT_INTEGER
+      #ifdef KD_COMP_MSVC
+    "%llu"
+      #else
     "%lu"
+      #endif  /* KD_COMP_MSVC */
     #else
     "%u"
     #endif  /* TYPES_64BIT_INTEGER */
@@ -230,7 +288,11 @@ int main(int argc, char **argv)
   (void) printf(
     "val_usize = "
     #ifdef TYPES_64BIT_INTEGER
+      #ifdef KD_COMP_MSVC
+    "%llu"
+      #else
     "%lu"
+      #endif  /* KD_COMP_MSVC */
     #else
     "%u"
     #endif  /* TYPES_64BIT_INTEGER */
@@ -247,7 +309,11 @@ int main(int argc, char **argv)
   (void) printf(
     "\tval = "
     #ifdef TYPES_64BIT_INTEGER
+      #ifdef KD_COMP_MSVC
+    "%lld"
+      #else
     "%ld"
+      #endif  /* KD_COMP_MSVC */
     #else
     "%d"
     #endif  /* TYPES_64BIT_INTEGER */
@@ -275,7 +341,11 @@ int main(int argc, char **argv)
   (void) printf(
     "\tval_imax = "
     #ifdef TYPES_64BIT_INTEGER
+      #ifdef KD_COMP_MSVC
+    "%lld"
+      #else
     "%ld"
+      #endif  /* KD_COMP_MSVC */
     #else
     "%d"
     #endif  /* TYPES_64BIT_INTEGER */
@@ -289,7 +359,11 @@ int main(int argc, char **argv)
   (void) printf(
     "\tval_umax = "
     #ifdef TYPES_64BIT_INTEGER
+      #ifdef KD_COMP_MSVC
+    "%llu"
+      #else
     "%lu"
+      #endif  /* KD_COMP_MSVC */
     #else
     "%u"
     #endif  /* TYPES_64BIT_INTEGER */
@@ -298,7 +372,11 @@ int main(int argc, char **argv)
   (void) printf(
     "\tval_usize = "
     #ifdef TYPES_64BIT_INTEGER
+      #ifdef KD_COMP_MSVC
+    "%llu"
+      #else
     "%lu"
+      #endif  /* KD_COMP_MSVC */
     #else
     "%u"
     #endif  /* TYPES_64BIT_INTEGER */
@@ -330,8 +408,14 @@ int main(int argc, char **argv)
   (void) printf("\tptr_fmax = %p\n", (void *) val_any.ptr_fmax);
 
   #ifdef TYPES_64BIT_INTEGER
+    #ifdef KD_COMP_MSVC
+  (void) printf("\tval_i64 = %lld\n", val_any.val_i64);
+  (void) printf("\tval_u64 = %llu\n", val_any.val_u64);
+    #else
   (void) printf("\tval_i64 = %ld\n", val_any.val_i64);
   (void) printf("\tval_u64 = %lu\n", val_any.val_u64);
+    #endif  /* KD_COMP_MSVC */
+
   (void) printf("\tptr_i64 = %p\n", (void *) val_any.ptr_i64);
   (void) printf("\tptr_u64 = %p\n", (void *) val_any.ptr_u64);
   #endif  /* TYPES_64BIT_INTEGER */
