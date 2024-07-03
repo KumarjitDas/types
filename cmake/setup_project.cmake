@@ -1,6 +1,6 @@
 # file: setup_project.cmake
 # author: Kumarjit Das
-# date: 2024-07-01
+# date: 2024-07-03
 # brief: TYPES library cmake project setup file.
 
 # BSD 2-Clause License
@@ -41,7 +41,7 @@ string(TOUPPER ${TYPES_LIBRARY_NAME} TYPES_LIBRARY_NAME_UPPER)
 
 # Setting project version
 set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_MAJOR 1)
-set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_MINOR 0)
+set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_MINOR 1)
 set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_PATCH 0)
 
 string(CONCAT ${TYPES_LIBRARY_NAME_UPPER}_VERSION
@@ -51,7 +51,7 @@ string(CONCAT ${TYPES_LIBRARY_NAME_UPPER}_VERSION
 
 # Setting project description
 string(CONCAT ${TYPES_PROJECT_NAME_UPPER}_DESCRIPTION
-  "A simple, header-only C library designed to provide compile-time system information.")
+  "A simple, header-only C library designed to provide types with sizes.")
 
 set(TYPES_INSTALL_DIR_NAME "${TYPES_PROJECT_NAME_LOWER}-v${${TYPES_LIBRARY_NAME_UPPER}_VERSION}")
 
@@ -84,9 +84,7 @@ endif ()
 write_status("Current user path: ${TYPES_CURRENT_USER_PATH}")
 
 # Getting the build directory name from current binary directory
-string(REPLACE "${CMAKE_SOURCE_DIR}/"
-  "" TYPES_BUILD_DIRECTORY
-  ${CMAKE_CURRENT_BINARY_DIR})
+string(REPLACE "${CMAKE_SOURCE_DIR}/" "" TYPES_BUILD_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 # Setting the build library type name
 if(BUILD_SHARED_LIBS)

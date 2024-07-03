@@ -1,5 +1,25 @@
 # Release Notes
 
+## [v1.1.0](https://github.com/KumarjitDas/types/releases/tag/v1.1.0)
+3rd July 2024
+
+### Resolved Issues
+
+- [Issue #6](https://github.com/KumarjitDas/types/issues/7): Added exit status `EXIT_SUCCESS` and `EXIT_FAILURE` macros.
+- [Issue #4](https://github.com/KumarjitDas/types/issues/4): Added an example without OS/CPU architecture/compiler checks with `ifdef`: [_examples/example2.c_](examples/example2.c).
+- [Issue #3](https://github.com/KumarjitDas/types/issues/3): Added `FSBTC_<TYPE_NAME>` type cast macros for values for using in the standard format string functions to suppress warnings for different types.
+- [Issue #2](https://github.com/KumarjitDas/types/issues/2): Added `FMTSP_<TYPE_NAME>` macros for C-style format specifiers for all types to be used in the standard format string functions.
+- [Issue #5](https://github.com/KumarjitDas/types/issues/5): Using the newer version of **KDAPI** _(v1.1.0)_.
+- [Issue #7](https://github.com/KumarjitDas/types/issues/7): Remove the `/MD` option for MSVC compiler.
+
+### Added
+
+- Value assignment macro `ASSIGN_ANY` for `any` type.
+
+### Changed
+
+- Main example source file name(_examples/example.c_) to [_examples/example1.c_](examples/example1.c).
+
 ## [v1.0.0](https://github.com/KumarjitDas/types/releases/tag/v1.0.0)
 2nd July 2024
 
@@ -36,5 +56,6 @@ For more details, see the full [Changelog](CHANGELOG.md).
 
 ## Version Details
 
-- **First Release**: 1.0.0
-- **Release Date**: 2024-07-02
+- **Current Version**: 1.1.0
+- **Release Date**: 2024-07-03
+- **Previous Version**: 1.0.0

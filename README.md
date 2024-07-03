@@ -6,7 +6,6 @@ TYPES is a simple, header-only C library designed to provide types with sizes. T
 ## Table of Contents
 
 - [Features](#features)
-- [Installation](#installation)
 - [Requirements](#requirements)
 - [Usage](#usage)
 - [Roadmap](#roadmap)
@@ -29,7 +28,7 @@ TYPES is a simple, header-only C library designed to provide types with sizes. T
      - Other types: `byte`, `charcode`
      - Floating points: `f32`, `f64`, `fmin`, `fmax`
      - General purpose: `any`
-     - 
+
 2. **Type Pretend Macros**
    - `TYPES_PRETEND_64BIT_INTEGER`: Makes 64-bit types act as 32-bit types for compatibility purposes.
 
@@ -48,63 +47,83 @@ TYPES is a simple, header-only C library designed to provide types with sizes. T
    - `MAX_<TYPE_NAME>`: Macro to get the maximum value of a type.
    - `SZ_<TYPE_NAME>`: Macro to get the size of a type.
 
-## Installation
+6. **Format Specifiers and Type Casts**
+   - `FMTSP_<TYPE_NAME>`: Macro to get standard C format specifiers.
+   - `FSBTC_<TYPE_NAME>`: Function-like macro to type cast the library types.
+
+## Requirements
 
 To get started with this project, download and install the following.
 
 - Download and install **git**
-  - If you use *Windows*, then go to this [link](https://git-scm.com/downloads) and download and install the suitable version.
-  - If you use any stable version of *Debian/Ubuntu* then run this command in your terminal
+    - If you use *Windows*, then go to this [link](https://git-scm.com/downloads) and download and install the suitable version.
+    - If you use any stable version of *Debian/Ubuntu* then run this command in your terminal
 
-    ```sh
-    sudo apt-get install git
-    ```
+      ```shell
+      sudo apt-get install git
+      ```
 
-  - If you use *macOS* then install [homebrew](https://brew.sh/) if you don't already have it, then run this command in your terminal
+    - If you use *macOS* then install [homebrew](https://brew.sh/) if you don't already have it, then run this command in your terminal
 
-    ```sh
-    brew install git
-    ```
+      ```shell
+      brew install git
+      ```
 
 - Run the command to clone this repository
 
-  ```sh
+  ```shell
   git clone https://github.com/KumarjitDas/types.git
   ```
 
 - Download and install a **C** compiler
-  - If you use *Windows 8/10/11* then download **Visual Studio 2017/2019/2022** from this [link](https://visualstudio.microsoft.com/downloads/) download and install a suitable version of **clang** from this [link](https://releases.llvm.org/download.html). For **gcc**, use the suitable *MinGW* version from this [link](http://mingw-w64.org/doku.php/download).
-  - If you use any stable version of *Debian/Ubuntu* then run these commands in your terminal to download and install **clang** and **gcc** compilers
+    - If you use *Windows 8/10/11* then download **Visual Studio 2017/2019/2022** from this [link](https://visualstudio.microsoft.com/downloads/) download and install a suitable version of **clang** from this [link](https://releases.llvm.org/download.html). For **gcc**, use the suitable *MinGW* version from this [link](http://mingw-w64.org/doku.php/download).
+    - If you use any stable version of *Debian/Ubuntu* then run these commands in your terminal to download and install **clang** and **gcc** compilers
 
-    ```sh
-    sudo apt install clang
-    ```
+      ```shell
+      sudo apt install clang
+      ```
 
-    ```sh
-    sudo apt install gcc
-    ```
+      ```shell
+      sudo apt install gcc
+      ```
 
-  - In *macOS*, **clang** is the default **C** compiler. To download and install gcc, run this command in your terminal
+    - In *macOS*, **clang** is the default **C** compiler. To download and install gcc, run this command in your terminal
 
-    ```sh
-    brew install gcc
-    ```
-
-## Requirements
+      ```shell
+      brew install gcc
+      ```
 
 - For building on Linux 32-bit targets on a 64-bit platform, `gcc-multilib` must be installed:
 
   ```bash
   sudo apt install gcc-multilib
   ```
+- Download and install **CMake** from [kitware](https://cmake.org/files/v3.19/) or [GitHub](https://github.com/Kitware/CMake/releases/tag/v3.19.6)
 
 ## Usage
 
-Include the `types.h` header file in your C project to use TYPES.
+- Download the [latest release](https://github.com/KumarjitDas/types/releases/latest) of the project according to your system specification.
 
-```c
-#include "types.h"
-```
+- For CMake projects add the _types_ library _cmake_ directory path to the `CMAKE_PREFIX_PATH` variable.
+    - In CMake file
+      ```cmake
+      # ...
+      list(APPEND CMAKE_PREFIX_PATH path/to/types/lib/cmake)
+      # ...
+      ```
+    - In command line as an argument
+      ```shell
+      cmake ... -DCMAKE_PREFIX_PATH=path/to/types/lib/cmake ...
+      ```
+- Include the _types.h_ header file in your C project to use TYPES.
+  ```c
+  #include "types.h"
+  ```
+
+- To build the project from source using CMake you have to provide target platform information (`TYPES_TARGET_OS` and `TYPES_TARGET_ARCH`. For example:
+  ```shell
+  cmake -DTYPES_TARGET_OS=windows -DTYPES_TARGET_ARCH=x64 -G Ninja -S path/to/types -B path/to/build
+  ```
 
 ### Example
 
@@ -120,7 +139,7 @@ int main() {
     i8 val8i = 128;
     u32 val32u = 654321;
     
-    printf("val8i: %d,  val32u = %u\n", (int) val8i, val32u);
+    printf("val8i: " FMTSP_I8 ",  val32u = " FMTSP_U32 "\n", FSBTC_I8(val8i), FSBTC_U32(val32u));
     
     return 0;
 }
@@ -182,11 +201,11 @@ The TYPES project follows a consistent naming convention to ensure readability a
 
 - **Function-like Macros:**
   - Macros that behave like functions are in uppercase with parameters in parentheses.
-  - Example: `TYPES_I64(x)`, `TYPES_U32(x)`.
+  - Example: `TYPES_I64(x)`, `TYPES_U32(x)`, `FSBTC_U32(x)`.
 
 - **Constant Values:**
   - Constants follow the uppercase convention and often include type indications.
-  - Example: `MIN_I8`, `MAX_I32`, `SZ_BOOL`.
+  - Example: `MIN_I8`, `MAX_I32`, `SZ_BOOL`, `FMTSP_I8`.
 
 ## License
 
@@ -207,8 +226,10 @@ List of functionalities/features implemented so far:
 - **Macro `MIN_<TYPE_NAME>`**: Gets the minimum value of a type.
 - **Macro `MAX_<TYPE_NAME>`**: Gets the maximum value of a type.
 - **Macro `SZ_<TYPE_NAME>`**: Gets the size of a type.
+- **Macro `FMTSP_<TYPE_NAME>`**: Gets compatible standard C format specifier of a type.
+- **Macro `FMTSP_<TYPE_NAME>(x)`**: Gets suitable type cast of a type.
 - **Build Configuration**: CMake configuration files for shared and static builds.
-- **Example Program**: [Example](examples/example.c) demonstrating library usage.
+- **Example Programs**: [Examples](examples) demonstrating library usage.
 
 ## Acknowledgment
 

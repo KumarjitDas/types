@@ -1,26 +1,26 @@
 /**
  * @file types.h
  * @author Kumarjit Das
- * @date 2024-07-02
+ * @date 2024-07-03
  * @version @TYPES_VERSION_MAJOR@.@TYPES_VERSION_MINOR@.@TYPES_VERSION_PATCH@
  * @brief A simple, header-only C library designed to provide types with sizes.
  */
 /**
  * LICENSE:
- * 
+ *
  * Copyright (c) 2024, Kumarjit Das
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * - Redistributions of source code must retain the above copyright notice, this
  *   list of conditions and the following disclaimer.
- * 
+ *
  * - Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -36,6 +36,7 @@
 
 #ifndef TYPES_H_
 #define TYPES_H_
+
 
 #define KD_DEFINED_LIBTYPES 1
 
@@ -58,9 +59,9 @@
 
 
 /**
- * ---------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  64-Bit Integer Signatures
- * ---------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 #if defined _MSC_VER || defined __BORLANDC__ || defined __WATCOMC__ || (defined __alpha && defined __DECC)
@@ -121,9 +122,9 @@ typedef unsigned long           kd_types__type_u64_;
 
 
 /**
- * --------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  64-Bit Pointer Signature
- * --------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 #if defined KD_CPU_AXP && (defined KD_OS_TRU64 || defined KD_OS_LINUX)
@@ -144,9 +145,9 @@ typedef unsigned long           kd_types__type_u64_;
 
 
 /**
- * --------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  Defined types Signatures
- * --------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 #define TYPES_DEFINED_TYPE_BOOL     1
@@ -176,20 +177,22 @@ typedef unsigned long           kd_types__type_u64_;
 
 
 /**
- * --------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  Defined type values Signatures
- * --------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
-#define TYPES_DEFINED_TYPEVAL_TRUE  1
-#define TYPES_DEFINED_TYPEVAL_FALSE 1
-#define TYPES_DEFINED_TYPEVAL_NULL  1
+#define TYPES_DEFINED_TYPEVAL_TRUE         1
+#define TYPES_DEFINED_TYPEVAL_FALSE        1
+#define TYPES_DEFINED_TYPEVAL_NULL         1
+#define TYPES_DEFINED_TYPEVAL_EXIT_SUCCESS 1
+#define TYPES_DEFINED_TYPEVAL_EXIT_FAILURE 1
 
 
 /**
- * ------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  Type Definitions
- * ------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 enum kd_types__type_bool_ { false, true };
@@ -249,7 +252,7 @@ union kd_types__type_any_
 {
   imax                val;
   kd_types__type_ptr_ ptr;
-  byte                slice[sizeof(imax)];
+  byte                slice[8];
   bool                val_bool;
   i8                  val_i8;
   i16                 val_i16;
@@ -299,9 +302,9 @@ typedef union kd_types__type_any_ any;
 
 
 /**
- * ---------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  Minimum Values Of Defined Types
- * ---------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 #define MIN_I8       (-128)
@@ -341,9 +344,9 @@ typedef union kd_types__type_any_ any;
 
 
 /**
- * ---------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  Maximum Values Of Defined Types
- * ---------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 #define MAX_I8       127
@@ -399,22 +402,32 @@ typedef union kd_types__type_any_ any;
 
 
 /**
- * ------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  Constant Values/Macros
- * ------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 #if defined null
   #undef null
 #endif  /* null */
 
-#define null ((kd_types__type_ptr_)0x00)
+#if defined EXIT_SUCCESS
+  #undef EXIT_SUCCESS
+#endif  /* EXIT_SUCCESS */
+
+#if defined EXIT_FAILURE
+  #undef EXIT_FAILURE
+#endif  /* EXIT_FAILURE */
+
+#define null         ((kd_types__type_ptr_)0x00)
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
 
 
 /**
- * -----------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *  Sizes Of Defined Types (In Bytes)
- * -----------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  */
 
 #define SZ_BOOL     sizeof(bool)
@@ -437,10 +450,176 @@ typedef union kd_types__type_any_ any;
 #define SZ_FMAX     sizeof(fmax)
 #define SZ_ANY      sizeof(any)
 #define SZ_PTR      sizeof(kd_types__type_ptr_)
+
 #if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
   #define SZ_I64    sizeof(i64)
   #define SZ_U64    sizeof(u64)
 #endif
+
+
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ *  C-style Format Specifiers
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+
+#define FMTSP_BOOL       "%s"
+#define FMTSP_I8         "%d"
+#define FMTSP_I16        "%d"
+#define FMTSP_IMIN       "%d"
+#define FMTSP_U8         "%u"
+#define FMTSP_U16        "%u"
+#define FMTSP_UMIN       "%u"
+#define FMTSP_BYTE       "%u"
+#define FMTSP_F32        "%.9e"
+#define FMTSP_F64        "%.17e"
+#define FMTSP_FMIN       "%.9e"
+#define FMTSP_FMAX       "%.17e"
+#define FMTSP_PTR        "%p"
+
+#if defined TYPES_32BIT_INTEGER
+  #if __SIZEOF_INT__ == 4
+    #define FMTSP_I32    "%d"
+    #define FMTSP_U32    "%u"
+  #elif __SIZEOF_INT__ == 2
+    #define FMTSP_I32    "%ld"
+    #define FMTSP_U32    "%lu"
+  #endif
+#else
+  #define FMTSP_I32      "%d"
+  #define FMTSP_U32      "%u"
+#endif  /* TYPES_32BIT_INTEGER */
+
+#define FMTSP_CHARCODE  FMTSP_U32
+
+#if defined TYPES_64BIT_INTEGER
+  #ifdef KD_COMP_MSVC
+    #define FMTSP_I64    "%lld"
+    #define FMTSP_U64    "%llu"
+    #define FMTSP_IMAX   "%lld"
+    #define FMTSP_UMAX   "%llu"
+    #define FMTSP_USIZE  "%llu"
+  #else
+    #define FMTSP_I64    "%ld"
+    #define FMTSP_U64    "%lu"
+    #define FMTSP_IMAX   "%ld"
+    #define FMTSP_UMAX   "%lu"
+    #define FMTSP_USIZE  "%lu"
+  #endif  /* KD_COMP_MSVC */
+#elif defined TYPES_PRETEND_64BIT_INTEGER
+  #define FMTSP_I64      FMTSP_I32
+  #define FMTSP_U64      FMTSP_I64
+  #define FMTSP_IMAX     FMTSP_U32
+  #define FMTSP_UMAX     FMTSP_U64
+  #define FMTSP_USIZE    FMTSP_U64
+#else
+  #define FMTSP_IMAX     FMTSP_I32
+  #define FMTSP_UMAX     FMTSP_U32
+  #define FMTSP_USIZE    FMTSP_U32
+#endif  /* TYPES_64BIT_INTEGER */
+
+#if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
+  #define FMTSP_ANY      FMTSP_UMAX
+#elif TYPES_64BIT_POINTER
+  #define FMTSP_ANY      FMTSP_PTR
+#else
+  #define FMTSP_ANY      FMTSP_U32
+#endif  /* TYPES_64BIT_INTEGER */
+
+#define FMTSP_ANY_SLICES "%d|%d|%d|%d|%d|%d|%d|%d"
+
+
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ *  C-style Format Specifier Based Type Cast
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+
+#define FSBTC_BOOL(x)       ((x) ? "true" : "false")
+#define FSBTC_I8(x)         (int) (x)
+#define FSBTC_I16(x)        (int) (x)
+#define FSBTC_IMIN(x)       (int) (x)
+#define FSBTC_U8(x)         (unsigned int) (x)
+#define FSBTC_U16(x)        (unsigned int) (x)
+#define FSBTC_UMIN(x)       (unsigned int) (x)
+#define FSBTC_BYTE(x)       (unsigned int) (x)
+#define FSBTC_F32(x)        (double) (x)
+#define FSBTC_F64(x)        (x)
+#define FSBTC_FMIN(x)       FSBTC_F32(x)
+#define FSBTC_FMAX(x)       FSBTC_F64(x)
+#define FSBTC_PTR(x)        (kd_types__type_ptr_) (x)
+
+#if defined TYPES_32BIT_INTEGER
+  #if __SIZEOF_INT__ == 4
+    #define FSBTC_I32(x)    (x)
+    #define FSBTC_U32(x)    (unsigned int) (x)
+  #elif __SIZEOF_INT__ == 2
+    #define FSBTC_I32(x)    (long) (x)
+    #define FSBTC_U32(x)    (unsigned long) (x)
+  #endif
+#else
+  #define FSBTC_I32(x)      (x)
+  #define FSBTC_U32(x)      (unsigned int) (x)
+#endif  /* TYPES_32BIT_INTEGER */
+
+#define FSBTC_CHARCODE(x)   FSBTC_U32(x)
+
+#if defined TYPES_64BIT_INTEGER
+  #ifdef KD_COMP_MSVC
+    #define FSBTC_I64(x)    (long long) (x)
+    #define FSBTC_U64(x)    (unsigned long long) (x)
+    #define FSBTC_IMAX(x)   (long long) (x)
+    #define FSBTC_UMAX(x)   (unsigned long long) (x)
+    #define FSBTC_USIZE(x)  (unsigned long long) (x)
+  #else
+    #define FSBTC_I64(x)    (long) (x)
+    #define FSBTC_U64(x)    (unsigned long) (x)
+    #define FSBTC_IMAX(x)   (long) (x)
+    #define FSBTC_UMAX(x)   (unsigned long) (x)
+    #define FSBTC_USIZE(x)  (unsigned long) (x)
+  #endif  /* KD_COMP_MSVC */
+#elif defined TYPES_PRETEND_64BIT_INTEGER
+  #define FSBTC_I64(x)      FSBTC_I32(x)
+  #define FSBTC_U64(x)      FSBTC_I64(x)
+  #define FSBTC_IMAX(x)     FSBTC_U32(x)
+  #define FSBTC_UMAX(x)     FSBTC_U64(x)
+  #define FSBTC_USIZE(x)    FSBTC_U64(x)
+#else
+  #define FSBTC_IMAX(x)     FSBTC_I32(x)
+  #define FSBTC_UMAX(x)     FSBTC_U32(x)
+  #define FSBTC_USIZE(x)    FSBTC_U32(x)
+#endif  /* TYPES_64BIT_INTEGER */
+
+#if defined TYPES_64BIT_INTEGER || defined TYPES_PRETEND_64BIT_INTEGER
+  #define FSBTC_ANY(x)      FSBTC_UMAX(x)
+#elif TYPES_64BIT_POINTER
+  #define FSBTC_ANY(x)      FSBTC_PTR(x)
+#else
+  #define FSBTC_ANY(x)      FSBTC_U32(x)
+#endif  /* TYPES_64BIT_INTEGER */
+
+#define FSBTC_ANY_SLICES(x) \
+  (int) (x).slice[0], (int) (x).slice[1], \
+  (int) (x).slice[2], (int) (x).slice[3], \
+  (int) (x).slice[4], (int) (x).slice[5], \
+  (int) (x).slice[6], (int) (x).slice[7]
+
+
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ *  Value Assignment
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+
+#define ASSIGN_ANY(x, v0, v1, v2, v3, v4, v5, v6, v7) \
+  (x).slice[0] = v0; \
+  (x).slice[1] = v1; \
+  (x).slice[2] = v2; \
+  (x).slice[3] = v3; \
+  (x).slice[4] = v4; \
+  (x).slice[5] = v5; \
+  (x).slice[6] = v6; \
+  (x).slice[7] = v7
 
 
 #endif  /* TYPES_H_ */

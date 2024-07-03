@@ -1,5 +1,30 @@
 # Changelog
 
+## [v1.1.0](https://github.com/KumarjitDas/types/compare/v1.0.0...v1.1.0) - 2024-07-03
+
+### Added
+
+- [Issue #6](https://github.com/KumarjitDas/types/issues/7)&nbsp; Add exit status macros
+  - `EXIT_SUCCESS` and `EXIT_FAILURE` macros
+- [Issue #4](https://github.com/KumarjitDas/types/issues/4)&nbsp; An example without OS/CPU/compiler checks
+  - Example without OS/CPU architecture/compiler checks with `ifdef`: [_examples/example2.c_](examples/example2.c)
+- [Issue #3](https://github.com/KumarjitDas/types/issues/3)&nbsp; Add printable type cast macros
+  - `FSBTC_<TYPE_NAME>` type cast macros for values for using in the standard format string functions to suppress warnings for different types
+- [Issue #2](https://github.com/KumarjitDas/types/issues/2)&nbsp; Add C-style format specifiers
+  - `FMTSP_<TYPE_NAME>` macros for C-style format specifiers for all types to be used in the standard format string functions
+- Value assignment macro `ASSIGN_ANY` for `any` type
+
+### Changed
+
+- [Issue #5](https://github.com/KumarjitDas/types/issues/5)&nbsp; Use the newer version of KDAPI
+  - Using the newer version of **KDAPI** _(v1.1.0)_.
+- Main example source file name(_examples/example.c_) to [_examples/example1.c_](examples/example1.c)
+
+### Removed
+
+- [Issue #7](https://github.com/KumarjitDas/types/issues/7)&nbsp; Remove the /MD option for MSVC compiler
+  - The `/MD` option for MSVC compiler
+
 ## [v1.0.0](https://github.com/KumarjitDas/types/releases/tag/v1.0.0) - 2024-07-02
 
 ### Added
