@@ -1,25 +1,25 @@
 /**
- * @file example.c
+ * @file example1.c
  * @author Kumarjit Das
- * @date 2024-07-02
- * @brief TYPES library main example source file.
+ * @date 2024-07-03
+ * @brief TYPES library example source file #1.
  */
 /**
  * LICENSE:
  * 
  * Copyright (c) 2024, Kumarjit Das
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * - Redistributions of source code must retain the above copyright notice, this
  *   list of conditions and the following disclaimer.
- * 
+ *
  * - Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
   (void) argc;
   (void) argv;
 
-  (void) printf("TYPES example :: begin\n");
+  (void) printf("TYPES example #1 :: begin\n");
 
   (void) printf("\nSizes of types:\n\n");
 
@@ -424,7 +424,7 @@ int main(int argc, char **argv)
 
   (void) printf("val_ptr = %p,\n", val_ptr);
 
-  (void) printf("\nTYPES example :: end\n");
+  (void) printf("\nTYPES example #1 :: end\n");
 
   return 0;
 }
