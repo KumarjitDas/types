@@ -1,5 +1,37 @@
 # Release Notes
 
+## [v1.2.0](https://github.com/KumarjitDas/types/releases/tag/v1.2.0) - 2024-07-06
+6th July 2024
+
+### Resolved Issues
+
+- [Issue #10](https://github.com/KumarjitDas/types/issues/10): Fixed boolean type error for C++.
+- [Issue #12](https://github.com/KumarjitDas/types/issues/12): Added license statement to all CMake files.
+- [Issue #14](https://github.com/KumarjitDas/types/issues/14): Added C++ check wrapping around the library.
+- [Issue #1](https://github.com/KumarjitDas/types/issues/11): Updated the dependency section in README.
+- [Issue #9](https://github.com/KumarjitDas/types/issues/9): Using **kdapi** _v1.2.0_ for architecture specific macro definitions.
+- [Issue #15](https://github.com/KumarjitDas/types/issues/15): Removed 'Is defined component' macros.
+- [Issue #8](https://github.com/KumarjitDas/types/issues/8): Removed _TYPES_'s own architecture specific macros and used _KDAPI_'s.
+
+### Fixed
+
+- 64-bit prints for any types in example2.
+
+### Added
+
+- API version in examples.
+
+### Changed
+
+- Did some minor documentation changes.
+- Updated version to _1.2.0_.
+- Updated readme.
+- Updated release notes.
+
+### Removed
+
+- 'Acknowledgment' section from readme file.
+
 ## [v1.1.0](https://github.com/KumarjitDas/types/releases/tag/v1.1.0)
 3rd July 2024
 
@@ -56,6 +88,6 @@ For more details, see the full [Changelog](CHANGELOG.md).
 
 ## Version Details
 
-- **Current Version**: 1.1.0
-- **Release Date**: 2024-07-03
-- **Previous Version**: 1.0.0
+- **Current Version**: 1.2.0
+- **Release Date**: 6th July 2024
+- **Previous Version**: 1.1.0

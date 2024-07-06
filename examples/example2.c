@@ -1,7 +1,7 @@
 /**
  * @file example2.c
  * @author Kumarjit Das
- * @date 2024-07-03
+ * @date 2024-07-06
  * @brief TYPES library example source file #2.
  */
 /**
@@ -70,6 +70,8 @@ int main(int argc, char **argv)
   (void) argv;
 
   (void) printf("TYPES example #2 :: begin\n");
+
+  (void) printf("\nAPI Version: %s\n", TYPES_VERSION_STR);
 
   (void) printf("\nSizes of types:\n\n");
 
@@ -210,8 +212,8 @@ int main(int argc, char **argv)
   (void) printf("val_ptr = " FMTSP_PTR ",\n", FSBTC_PTR(val_ptr));
 
   #if defined TYPES_64BIT_INTEGER
-  (void) printf("val_i8 = " FMTSP_I64 ",\n", FSBTC_I64(val_i64));
-  (void) printf("val_i8 = " FMTSP_U64 ",\n", FSBTC_U64(val_u64));
+  (void) printf("val_i64 = " FMTSP_I64 ",\n", FSBTC_I64(val_i64));
+  (void) printf("val_u64 = " FMTSP_U64 ",\n", FSBTC_U64(val_u64));
   #endif  /* TYPES_64BIT_INTEGER */
 
   (void) printf("val_any: {\n");
@@ -257,10 +259,10 @@ int main(int argc, char **argv)
   (void) printf("\tslice = " FMTSP_ANY_SLICES ",\n", FSBTC_ANY_SLICES(val_any));
 
   #if defined TYPES_64BIT_INTEGER
-  (void) printf("\tval_i8 = " FMTSP_I64 ",\n", FSBTC_I64(val_any.val_i64));
-  (void) printf("\tval_i8 = " FMTSP_U64 ",\n", FSBTC_U64(val_any.val_u64));
-  (void) printf("\tptr_i8 = " FMTSP_PTR ",\n", FSBTC_PTR(val_any.ptr_i64));
-  (void) printf("\tptr_i8 = " FMTSP_PTR ",\n", FSBTC_PTR(val_any.ptr_u64));
+  (void) printf("\tval_i64 = " FMTSP_I64 ",\n", FSBTC_I64(val_any.val_i64));
+  (void) printf("\tval_u64 = " FMTSP_U64 ",\n", FSBTC_U64(val_any.val_u64));
+  (void) printf("\tptr_i64 = " FMTSP_PTR ",\n", FSBTC_PTR(val_any.ptr_i64));
+  (void) printf("\tptr_u64 = " FMTSP_PTR ",\n", FSBTC_PTR(val_any.ptr_u64));
   #endif  /* TYPES_64BIT_INTEGER */
 
   (void) printf("}\n");

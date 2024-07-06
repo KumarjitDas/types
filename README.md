@@ -1,4 +1,3 @@
-
 # TYPES
 
 TYPES is a simple, header-only C library designed to provide types with sizes. This project targets both Windows and GNU/Linux (32-bit and 64-bit) platforms. The library aims to help developers easily specify the size of a type instead of relying on the compiler/OS/CPU architecture and macros.
@@ -8,12 +7,12 @@ TYPES is a simple, header-only C library designed to provide types with sizes. T
 - [Features](#features)
 - [Requirements](#requirements)
 - [Usage](#usage)
+- [Dependency](#dependency)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Naming Convention](#naming-convention)
 - [License](#license)
 - [Project Status](#project-status)
-- [Acknowledgment](#acknowledgment)
 - [Contact](#contact)
 - [Versioning](#versioning)
 - [Changelog](#changelog)
@@ -22,32 +21,28 @@ TYPES is a simple, header-only C library designed to provide types with sizes. T
 
 1. **Type Definitions**
    - Added comprehensive type definitions:
-     - Boolean: `bool`
-     - Signed integers: `i8`, `i16`, `i32`, `i64`, `imin`, `imax`
-     - Unsigned integers: `u8`, `u16`, `u32`, `u64`, `umin`, `umax`, `usize`
-     - Other types: `byte`, `charcode`
-     - Floating points: `f32`, `f64`, `fmin`, `fmax`
-     - General purpose: `any`
+        - Boolean: `bool`
+        - Signed integers: `i8`, `i16`, `i32`, `i64`, `imin`, `imax`
+        - Unsigned integers: `u8`, `u16`, `u32`, `u64`, `umin`, `umax`, `usize`
+        - Other types: `byte`, `charcode`
+        - Floating points: `f32`, `f64`, `fmin`, `fmax`
+        - General purpose: `any`
 
 2. **Type Pretend Macros**
    - `TYPES_PRETEND_64BIT_INTEGER`: Makes 64-bit types act as 32-bit types for compatibility purposes.
 
-3. **Type Definition Checks**
-   - `TYPES_DEFINED_TYPE_<TYPE_NAME>`: Checks if a type is defined in the current environment.
-   - `TYPES_DEFINED_TYPEVAL_<VALUE_NAME>`: Checks if a constant value of a type is defined.
-
-4. **Integer and Pointer Size Checks**
+3. **Integer and Pointer Size Checks**
    - `TYPES_64BIT_INTEGER`: Checks if the compiler, OS, and CPU support 64-bit integers.
    - `TYPES_32BIT_INTEGER`: Checks if the compiler, OS, and CPU support 32-bit integers.
    - `TYPES_64BIT_POINTER`: Checks if the compiler, OS, and CPU support 64-bit pointers.
    - `TYPES_32BIT_POINTER`: Checks if the compiler, OS, and CPU support 32-bit pointers.
 
-5. **Type Boundaries and Sizes**
+4. **Type Boundaries and Sizes**
    - `MIN_<TYPE_NAME>`: Macro to get the minimum value of a type.
    - `MAX_<TYPE_NAME>`: Macro to get the maximum value of a type.
    - `SZ_<TYPE_NAME>`: Macro to get the size of a type.
 
-6. **Format Specifiers and Type Casts**
+5. **Format Specifiers and Type Casts**
    - `FMTSP_<TYPE_NAME>`: Macro to get standard C format specifiers.
    - `FSBTC_<TYPE_NAME>`: Function-like macro to type cast the library types.
 
@@ -59,46 +54,83 @@ To get started with this project, download and install the following.
     - If you use *Windows*, then go to this [link](https://git-scm.com/downloads) and download and install the suitable version.
     - If you use any stable version of *Debian/Ubuntu* then run this command in your terminal
 
-      ```shell
-      sudo apt-get install git
-      ```
+        ```shell
+        sudo apt-get install git
+        ```
 
     - If you use *macOS* then install [homebrew](https://brew.sh/) if you don't already have it, then run this command in your terminal
 
-      ```shell
-      brew install git
-      ```
+        ```shell
+        brew install git
+        ```
 
 - Run the command to clone this repository
-
-  ```shell
-  git clone https://github.com/KumarjitDas/types.git
-  ```
+    
+    ```shell
+    git clone https://github.com/KumarjitDas/types.git
+    ```
 
 - Download and install a **C** compiler
-    - If you use *Windows 8/10/11* then download **Visual Studio 2017/2019/2022** from this [link](https://visualstudio.microsoft.com/downloads/) download and install a suitable version of **clang** from this [link](https://releases.llvm.org/download.html). For **gcc**, use the suitable *MinGW* version from this [link](http://mingw-w64.org/doku.php/download).
+    - If you use *Windows 8/10/11* then download **Visual Studio 2017/2019/2022** from this [link](https://visualstudio.microsoft.com/downloads/) or download and install a suitable version of **clang** from this [link](https://releases.llvm.org/download.html). For **gcc**, use the suitable *MinGW* version from this [link](http://mingw-w64.org/doku.php/download).
+
     - If you use any stable version of *Debian/Ubuntu* then run these commands in your terminal to download and install **clang** and **gcc** compilers
 
-      ```shell
-      sudo apt install clang
-      ```
+        ```shell
+        sudo apt install clang
+        ```
 
-      ```shell
-      sudo apt install gcc
-      ```
+        ```shell
+        sudo apt install gcc
+        ```
 
     - In *macOS*, **clang** is the default **C** compiler. To download and install gcc, run this command in your terminal
 
-      ```shell
-      brew install gcc
-      ```
+        ```shell
+        brew install gcc
+        ```
 
 - For building on Linux 32-bit targets on a 64-bit platform, `gcc-multilib` must be installed:
 
-  ```bash
-  sudo apt install gcc-multilib
-  ```
-- Download and install **CMake** from [kitware](https://cmake.org/files/v3.19/) or [GitHub](https://github.com/Kitware/CMake/releases/tag/v3.19.6)
+    ```bash
+    sudo apt install gcc-multilib
+    ```
+
+- Download and install **CMake**
+    - For *Windows 8/10/11* download from [kitware](https://cmake.org/files/v3.19/) or [GitHub](https://github.com/Kitware/CMake/releases/tag/v3.19.6)
+
+    - If you use any stable version of *Debian/Ubuntu* then run these commands in your terminal to download and install **cmake**
+
+        ```shell
+        sudo apt install cmake
+        ```
+
+    - To download and install **cmake** on *macOS*, run this command in your terminal
+
+        ```shell
+        brew install cmake
+        ```
+
+### Dependency
+
+The **types** library depends on the **kdapi** library. Ensure that you have the **kdapi** library available in your project. If you do not provide the location of the **kdapi** CMake targets, the **types** library will attempt to download the **kdapi** library and place it in the _external_ directory inside the build tree.
+
+#### Including _kdapi_
+
+- Download the `kdapi` library from the official [repository](https://github.com/KumarjitDas/kdapi/releases/latest) or [source](https://github.com/KumarjitDas/kdapi/archive/refs/tags/v1.2.0.zip).
+- Provide the cmake-targets path in either inside root cmake file or in the command line
+    - In CMake file
+
+        ```cmake
+        # ...
+        list(APPEND CMAKE_PREFIX_PATH path/to/kdapi/lib/cmake)
+        # ...
+        ```
+
+    - In command line as an argument
+
+        ```shell
+        cmake ... -DCMAKE_PREFIX_PATH=path/to/kdapi/lib/cmake ...
+        ```
 
 ## Usage
 
@@ -106,28 +138,34 @@ To get started with this project, download and install the following.
 
 - For CMake projects add the _types_ library _cmake_ directory path to the `CMAKE_PREFIX_PATH` variable.
     - In CMake file
-      ```cmake
-      # ...
-      list(APPEND CMAKE_PREFIX_PATH path/to/types/lib/cmake)
-      # ...
-      ```
-    - In command line as an argument
-      ```shell
-      cmake ... -DCMAKE_PREFIX_PATH=path/to/types/lib/cmake ...
-      ```
-- Include the _types.h_ header file in your C project to use TYPES.
-  ```c
-  #include "types.h"
-  ```
 
-- To build the project from source using CMake you have to provide target platform information (`TYPES_TARGET_OS` and `TYPES_TARGET_ARCH`. For example:
-  ```shell
-  cmake -DTYPES_TARGET_OS=windows -DTYPES_TARGET_ARCH=x64 -G Ninja -S path/to/types -B path/to/build
-  ```
+        ```cmake
+        # ...
+        list(APPEND CMAKE_PREFIX_PATH path/to/types/lib/cmake)
+        # ...
+        ```
+
+    - In command line as an argument
+
+        ```shell
+        cmake ... -DCMAKE_PREFIX_PATH=path/to/types/lib/cmake ...
+        ```
+
+- Include the _types.h_ header file in your C project to use KDAPI.
+
+    ```c
+    #include "types.h"
+    ```
+
+- To build the project from source using CMake you have to provide target platform information (`KDAPI_TARGET_OS` and `KDAPI_TARGET_ARCH`. For example:
+
+    ```shell
+    cmake -DKDAPI_TARGET_OS=windows -DKDAPI_TARGET_ARCH=x64 -G Ninja -S path/to/types -B path/to/build
+    ```
 
 ### Example
 
-An example usage of TYPES can be found in the `test.c` file.
+You can find all the examples [here](examples). Here's a demo:
 
 ```c
 #include <stdio.h>
@@ -160,21 +198,21 @@ contributions you make are greatly appreciated.
 - Fork this project \[[types](https://github.com/KumarjitDas/types)\]
 - Create your *Feature Branch*
 
-  ```sh
-  git checkout -b feature/AmazingFeature
-  ```
+    ```shell
+    git checkout -b feature/AmazingFeature
+    ```
 
 - Commit your *Changes*
 
-  ```sh
-  git commit -m 'Added some AmazingFeature'
-  ```
+    ```shell
+    git commit -m 'Added some AmazingFeature'
+    ```
 
 - Push to the Branch
 
-  ```sh
-  git push origin feature/AmazingFeature
-  ```
+    ```shell
+    git push origin feature/AmazingFeature
+    ```
 
 - Create a [pull request](https://github.com/KumarjitDas/types/pulls)
 
@@ -183,29 +221,29 @@ contributions you make are greatly appreciated.
 The TYPES project follows a consistent naming convention to ensure readability and maintainability. Here are the key aspects of the naming convention used:
 
 - **Macro Names**: Macro names are written in uppercase letters with underscores separating words. They typically start with the prefix `KD_`.
-  - Examples: `KD_COMPILER_GCC`, `KD_OS_LINUX`, `KD_CPU_X86_64`, `KD_VERSION_MAJOR`
+- Examples: `KD_COMPILER_GCC`, `KD_OS_LINUX`, `KD_CPU_X86_64`, `KD_VERSION_MAJOR`
 
 - **Macro Definitions:**
-  - Macro names are written in uppercase letters. They typically start with the prefix `TYPES_`.
-  - Words are separated by underscores (`_`).
-  - Example: `TYPES_VERSION_MAJOR`, `TYPES_DEFINED_TYPE_BOOL`.
+    - Macro names are written in uppercase letters. They typically start with the prefix `TYPES_`.
+    - Words are separated by underscores (`_`).
+    - Example: `TYPES_VERSION_MAJOR`, `TYPES_DEFINED_TYPE_BOOL`.
 
 - **Type Definitions:**
-  - Type names are in lowercase.
-  - Use of prefixes for type groups, such as `kd_types__type_` for internal types.
-  - Example: `kd_types__type_i64_`, `bool`, `i8`.
+    - Type names are in lowercase.
+    - Use of prefixes for type groups, such as `kd_types__type_` for internal types.
+    - Example: `kd_types__type_i64_`, `bool`, `i8`.
 
 - **Enums:**
-  - Enum names follow a similar lowercase pattern, with names indicating boolean values.
-  - Example: `kd_types__type_bool_` with values `false` and `true`.
+    - Enum names follow a similar lowercase pattern, with names indicating boolean values.
+    - Example: `kd_types__type_bool_` with values `false` and `true`.
 
 - **Function-like Macros:**
-  - Macros that behave like functions are in uppercase with parameters in parentheses.
-  - Example: `TYPES_I64(x)`, `TYPES_U32(x)`, `FSBTC_U32(x)`.
+    - Macros that behave like functions are in uppercase with parameters in parentheses.
+    - Example: `TYPES_I64(x)`, `TYPES_U32(x)`, `FSBTC_U32(x)`.
 
 - **Constant Values:**
-  - Constants follow the uppercase convention and often include type indications.
-  - Example: `MIN_I8`, `MAX_I32`, `SZ_BOOL`, `FMTSP_I8`.
+    - Constants follow the uppercase convention and often include type indications.
+    - Example: `MIN_I8`, `MAX_I32`, `SZ_BOOL`, `FMTSP_I8`.
 
 ## License
 
@@ -231,14 +269,6 @@ List of functionalities/features implemented so far:
 - **Build Configuration**: CMake configuration files for shared and static builds.
 - **Example Programs**: [Examples](examples) demonstrating library usage.
 
-## Acknowledgment
-
-I appreciate these websites which helped me to make such good **README** file, and helped me to learn about project versioning and keeping **CHANGELOG**.
-
-- [Make a README](https://www.makeareadme.com/)
-- [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
-- [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-
 ## Contact
 
 Twitter: [@kumarjitdas1999](https://twitter.com/kumarjitdas1999)
@@ -251,14 +281,14 @@ Project link: [TYPES](https://github.com/KumarjitDas/types)
 
 ## Versioning
 
-This project uses **MAJOR**, **MINOR**, and **PATCH** version numbers for
-versioning (v*MAJOR.MINOR.PATCH*).
+This project uses **MAJOR**, **MINOR**, and **PATCH** version numbers for versioning (v*MAJOR.MINOR.PATCH*).
 
 - **MAJOR** version number indicates *new changes which may be incompatible with older versions*.
 - **MINOR** version number indicates *addition of backwards-compatible features*.
-- **PATCH** version number indicates *backwards-compatible bug fixes*, or minor mistake fixes like *spelling*,
-  *character cases*, *punctuations*, and *indentation*.
+- **PATCH** version number indicates *backwards-compatible bug fixes*, or minor mistake fixes like *spelling*, *character cases*, *punctuations*, and *indentation*.
 
 ## Changelog
 
 The [Changelog](CHANGELOG.md) file contains all the information about the changes made to this project till now.
+
+You can also view the [raw](https://raw.githubusercontent.com/KumarjitDas/types/main/CHANGELOG.md) version.

@@ -1,29 +1,71 @@
 # Changelog
 
+## [v1.2.0](https://github.com/KumarjitDas/types/compare/v1.1.0...v1.2.0) - 2024-07-06
+
+### Fixed
+
+- [Issue #10](https://github.com/KumarjitDas/types/issues/10)&nbsp; Boolean type error for C++
+    - Wrapped the library around C++ checking macros.
+
+- 64-bit prints for any types in example2.
+
+### Added
+
+- [Issue #12](https://github.com/KumarjitDas/types/issues/12)&nbsp; CMake files do not contain license statement
+    - License statement to all CMake files.
+
+- [Issue #14](https://github.com/KumarjitDas/types/issues/14)&nbsp; Wrap the library around C++ check
+    - C++ check wrapping around the library.
+
+- API version in examples.
+
+- [Issue #1](https://github.com/KumarjitDas/types/issues/11)&nbsp; Add dependency section in README
+    - Updated the dependency section in README.
+
+### Changed
+
+- [Issue #9](https://github.com/KumarjitDas/types/issues/9)&nbsp; Use **kdapi** _v1.2.0_
+    - Using **kdapi** _v1.2.0_ for architecture specific macro definitions.
+
+- [Issue #15](https://github.com/KumarjitDas/types/issues/15)&nbsp; Remove 'Is defined component' macros
+    - Removed 'Is defined component' macros.
+
+- Did some minor documentation changes.
+- Updated version to _1.2.0_.
+- Updated readme.
+- Updated release notes.
+
+### Removed
+
+- [Issue #8](https://github.com/KumarjitDas/types/issues/8)&nbsp; Remove architecture specific macros
+    - _TYPES_'s own architecture specific macros and used _KDAPI_'s.
+
+- 'Acknowledgment' section from readme file.
+
 ## [v1.1.0](https://github.com/KumarjitDas/types/compare/v1.0.0...v1.1.0) - 2024-07-03
 
 ### Added
 
 - [Issue #6](https://github.com/KumarjitDas/types/issues/7)&nbsp; Add exit status macros
-  - `EXIT_SUCCESS` and `EXIT_FAILURE` macros
+    - `EXIT_SUCCESS` and `EXIT_FAILURE` macros
 - [Issue #4](https://github.com/KumarjitDas/types/issues/4)&nbsp; An example without OS/CPU/compiler checks
-  - Example without OS/CPU architecture/compiler checks with `ifdef`: [_examples/example2.c_](examples/example2.c)
+    - Example without OS/CPU architecture/compiler checks with `ifdef`: [_examples/example2.c_](examples/example2.c)
 - [Issue #3](https://github.com/KumarjitDas/types/issues/3)&nbsp; Add printable type cast macros
-  - `FSBTC_<TYPE_NAME>` type cast macros for values for using in the standard format string functions to suppress warnings for different types
+    - `FSBTC_<TYPE_NAME>` type cast macros for values for using in the standard format string functions to suppress warnings for different types
 - [Issue #2](https://github.com/KumarjitDas/types/issues/2)&nbsp; Add C-style format specifiers
-  - `FMTSP_<TYPE_NAME>` macros for C-style format specifiers for all types to be used in the standard format string functions
+    - `FMTSP_<TYPE_NAME>` macros for C-style format specifiers for all types to be used in the standard format string functions
 - Value assignment macro `ASSIGN_ANY` for `any` type
 
 ### Changed
 
 - [Issue #5](https://github.com/KumarjitDas/types/issues/5)&nbsp; Use the newer version of KDAPI
-  - Using the newer version of **KDAPI** _(v1.1.0)_.
+    - Using the newer version of **KDAPI** _(v1.1.0)_.
 - Main example source file name(_examples/example.c_) to [_examples/example1.c_](examples/example1.c)
 
 ### Removed
 
 - [Issue #7](https://github.com/KumarjitDas/types/issues/7)&nbsp; Remove the /MD option for MSVC compiler
-  - The `/MD` option for MSVC compiler
+    - The `/MD` option for MSVC compiler
 
 ## [v1.0.0](https://github.com/KumarjitDas/types/releases/tag/v1.0.0) - 2024-07-02
 

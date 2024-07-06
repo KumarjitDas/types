@@ -1,9 +1,9 @@
 # file: setup_project.cmake
 # author: Kumarjit Das
-# date: 2024-07-03
+# date: 2024-07-06
 # brief: TYPES library cmake project setup file.
 
-# BSD 2-Clause License
+# License:
 #
 # Copyright (c) 2024, Kumarjit Das
 # All rights reserved.
@@ -41,7 +41,7 @@ string(TOUPPER ${TYPES_LIBRARY_NAME} TYPES_LIBRARY_NAME_UPPER)
 
 # Setting project version
 set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_MAJOR 1)
-set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_MINOR 1)
+set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_MINOR 2)
 set(${TYPES_LIBRARY_NAME_UPPER}_VERSION_PATCH 0)
 
 string(CONCAT ${TYPES_LIBRARY_NAME_UPPER}_VERSION
@@ -71,8 +71,7 @@ write_status("Initiating the project setup.")
 # Generate compile commands for IDE's
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
-write_status("CMAKE_EXPORT_COMPILE_COMMANDS is set to: "
-  ${CMAKE_EXPORT_COMPILE_COMMANDS})
+write_status("CMAKE_EXPORT_COMPILE_COMMANDS is set to: ${CMAKE_EXPORT_COMPILE_COMMANDS}")
 
 # Setting the current user directory
 if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
