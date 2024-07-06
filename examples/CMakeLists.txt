@@ -67,8 +67,6 @@ foreach(EXAMPLE_ITEM ${EXAMPLE_LIST})
 
   # Check if the project builds shared libraries
   if(BUILD_SHARED_LIBS)
-    # If the project builds shared libraries then set the static and shared
-    # library directory to lib and executables directory to bin
     set_target_properties(
       ${EXAMPLE_TARGET}        PROPERTIES
       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"

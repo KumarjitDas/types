@@ -1,33 +1,46 @@
 # Changelog
 
-## [Unreleased](https://github.com/KumarjitDas/types/compare/v1.1.0...HEAD) - 2024-07-06
+## [v1.2.0](https://github.com/KumarjitDas/types/compare/v1.1.0...v1.2.0) - 2024-07-06
 
-- Resolved [Issue #8](https://github.com/KumarjitDas/types/issues/8)&nbsp; (Remove architecture specific macros)
-    - Removed _TYPES_'s own architecture specific macros and used _KDAPI_'s.
+### Fixed
 
-- Resolved [Issue #10](https://github.com/KumarjitDas/types/issues/10)&nbsp; (Boolean type error for C++)
-    - Fixed the error by wrapping the library around C++ checking macros.
+- [Issue #10](https://github.com/KumarjitDas/types/issues/10)&nbsp; Boolean type error for C++
+    - Wrapped the library around C++ checking macros.
 
-- Added API version in examples.
-- Fixed 64-bit prints for any types in example2
+- 64-bit prints for any types in example2.
 
-- Resolved [Issue #9](https://github.com/KumarjitDas/types/issues/9)&nbsp; (Use **kdapi** _v1.2.0_)
+### Added
+
+- [Issue #12](https://github.com/KumarjitDas/types/issues/12)&nbsp; CMake files do not contain license statement
+    - License statement to all CMake files.
+
+- [Issue #14](https://github.com/KumarjitDas/types/issues/14)&nbsp; Wrap the library around C++ check
+    - C++ check wrapping around the library.
+
+- API version in examples.
+
+- [Issue #1](https://github.com/KumarjitDas/types/issues/11)&nbsp; Add dependency section in README
+    - Updated the dependency section in README.
+
+### Changed
+
+- [Issue #9](https://github.com/KumarjitDas/types/issues/9)&nbsp; Use **kdapi** _v1.2.0_
     - Using **kdapi** _v1.2.0_ for architecture specific macro definitions.
 
-- Changed project version to _1.1.1_
-
-- Resolved [Issue #12](https://github.com/KumarjitDas/types/issues/12)&nbsp; (CMake files do not contain license statement)
-    - Added license statement to all CMake files.
-
-- Resolved [Issue #14](https://github.com/KumarjitDas/types/issues/14)&nbsp; (Wrap the library around C++ check)
-    - Added C++ check wrapping around the library.
-
-- Resolved [Issue #15](https://github.com/KumarjitDas/types/issues/15)&nbsp; (Remove 'Is defined component' macros)
+- [Issue #15](https://github.com/KumarjitDas/types/issues/15)&nbsp; Remove 'Is defined component' macros
     - Removed 'Is defined component' macros.
 
-- Added 'Dependency' section in readme file.
-- Removed 'Acknowledgment' section from readme file.
 - Did some minor documentation changes.
+- Updated version to _1.2.0_.
+- Updated readme.
+- Updated release notes.
+
+### Removed
+
+- [Issue #8](https://github.com/KumarjitDas/types/issues/8)&nbsp; Remove architecture specific macros
+    - _TYPES_'s own architecture specific macros and used _KDAPI_'s.
+
+- 'Acknowledgment' section from readme file.
 
 ## [v1.1.0](https://github.com/KumarjitDas/types/compare/v1.0.0...v1.1.0) - 2024-07-03
 
