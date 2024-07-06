@@ -1,4 +1,3 @@
-
 # TYPES
 
 TYPES is a simple, header-only C library designed to provide types with sizes. This project targets both Windows and GNU/Linux (32-bit and 64-bit) platforms. The library aims to help developers easily specify the size of a type instead of relying on the compiler/OS/CPU architecture and macros.
@@ -8,12 +7,12 @@ TYPES is a simple, header-only C library designed to provide types with sizes. T
 - [Features](#features)
 - [Requirements](#requirements)
 - [Usage](#usage)
+- [Dependency](#dependency)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Naming Convention](#naming-convention)
 - [License](#license)
 - [Project Status](#project-status)
-- [Acknowledgment](#acknowledgment)
 - [Contact](#contact)
 - [Versioning](#versioning)
 - [Changelog](#changelog)
@@ -22,12 +21,12 @@ TYPES is a simple, header-only C library designed to provide types with sizes. T
 
 1. **Type Definitions**
    - Added comprehensive type definitions:
-     - Boolean: `bool`
-     - Signed integers: `i8`, `i16`, `i32`, `i64`, `imin`, `imax`
-     - Unsigned integers: `u8`, `u16`, `u32`, `u64`, `umin`, `umax`, `usize`
-     - Other types: `byte`, `charcode`
-     - Floating points: `f32`, `f64`, `fmin`, `fmax`
-     - General purpose: `any`
+        - Boolean: `bool`
+        - Signed integers: `i8`, `i16`, `i32`, `i64`, `imin`, `imax`
+        - Unsigned integers: `u8`, `u16`, `u32`, `u64`, `umin`, `umax`, `usize`
+        - Other types: `byte`, `charcode`
+        - Floating points: `f32`, `f64`, `fmin`, `fmax`
+        - General purpose: `any`
 
 2. **Type Pretend Macros**
    - `TYPES_PRETEND_64BIT_INTEGER`: Makes 64-bit types act as 32-bit types for compatibility purposes.
@@ -59,15 +58,15 @@ To get started with this project, download and install the following.
     - If you use *Windows*, then go to this [link](https://git-scm.com/downloads) and download and install the suitable version.
     - If you use any stable version of *Debian/Ubuntu* then run this command in your terminal
 
-      ```shell
-      sudo apt-get install git
-      ```
+        ```shell
+        sudo apt-get install git
+        ```
 
     - If you use *macOS* then install [homebrew](https://brew.sh/) if you don't already have it, then run this command in your terminal
-
-      ```shell
-      brew install git
-      ```
+    
+        ```shell
+        brew install git
+        ```
 
 - Run the command to clone this repository
 
@@ -144,6 +143,10 @@ int main() {
     return 0;
 }
 ```
+
+## Dependency
+
+- TODO
 
 ## Roadmap
 
@@ -231,14 +234,6 @@ List of functionalities/features implemented so far:
 - **Build Configuration**: CMake configuration files for shared and static builds.
 - **Example Programs**: [Examples](examples) demonstrating library usage.
 
-## Acknowledgment
-
-I appreciate these websites which helped me to make such good **README** file, and helped me to learn about project versioning and keeping **CHANGELOG**.
-
-- [Make a README](https://www.makeareadme.com/)
-- [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
-- [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-
 ## Contact
 
 Twitter: [@kumarjitdas1999](https://twitter.com/kumarjitdas1999)
@@ -251,14 +246,14 @@ Project link: [TYPES](https://github.com/KumarjitDas/types)
 
 ## Versioning
 
-This project uses **MAJOR**, **MINOR**, and **PATCH** version numbers for
-versioning (v*MAJOR.MINOR.PATCH*).
+This project uses **MAJOR**, **MINOR**, and **PATCH** version numbers for versioning (v*MAJOR.MINOR.PATCH*).
 
 - **MAJOR** version number indicates *new changes which may be incompatible with older versions*.
 - **MINOR** version number indicates *addition of backwards-compatible features*.
-- **PATCH** version number indicates *backwards-compatible bug fixes*, or minor mistake fixes like *spelling*,
-  *character cases*, *punctuations*, and *indentation*.
+- **PATCH** version number indicates *backwards-compatible bug fixes*, or minor mistake fixes like *spelling*, *character cases*, *punctuations*, and *indentation*.
 
 ## Changelog
 
 The [Changelog](CHANGELOG.md) file contains all the information about the changes made to this project till now.
+
+You can also view the [raw](https://raw.githubusercontent.com/KumarjitDas/types/main/CHANGELOG.md) version.

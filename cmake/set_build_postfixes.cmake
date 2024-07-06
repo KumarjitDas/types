@@ -3,7 +3,7 @@
 # date: 2024-07-01
 # brief: TYPES library cmake build postfixes configuration file.
 
-# BSD 2-Clause License
+# License:
 #
 # Copyright (c) 2024, Kumarjit Das
 # All rights reserved.

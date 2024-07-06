@@ -1,9 +1,9 @@
 # file: add_external_libs.cmake
 # author: Kumarjit Das
-# date: 2024-07-03
+# date: 2024-07-06
 # brief: TYPES library cmake external libraries fetcher configuration.
 
-# BSD 2-Clause License
+# License:
 #
 # Copyright (c) 2024, Kumarjit Das
 # All rights reserved.
@@ -36,7 +36,7 @@ include(FetchContent)
 write_status("Adding external libraries.")
 
 set(_KDAPI_LIB kdapi)
-set(_KDAPI_VER 1.1.0)
+set(_KDAPI_VER 1.2.0)
 
 # Try to find the kdapi package first
 find_package(${_KDAPI_LIB} ${_KDAPI_VER} QUIET)
