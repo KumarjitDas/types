@@ -2,6 +2,15 @@
 
 ## [Unreleased](https://github.com/KumarjitDas/types/compare/v1.1.0...HEAD) - 2024-07-06
 
+- Resolved [Issue #8](https://github.com/KumarjitDas/types/issues/8)&nbsp; (Remove architecture specific macros)
+    - Removed _TYPES_'s own architecture specific macros and used _KDAPI_'s.
+
+- Resolved [Issue #10](https://github.com/KumarjitDas/types/issues/10)&nbsp; (Boolean type error for C++)
+    - Fixed the error by wrapping the library around C++ checking macros.
+
+- Added API version in examples.
+- Fixed 64-bit prints for any types in example2
+
 - Resolved [Issue #9](https://github.com/KumarjitDas/types/issues/9)&nbsp; (Use **kdapi** _v1.2.0_)
     - Using **kdapi** _v1.2.0_ for architecture specific macro definitions.
 

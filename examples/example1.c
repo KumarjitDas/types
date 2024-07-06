@@ -1,7 +1,7 @@
 /**
  * @file example1.c
  * @author Kumarjit Das
- * @date 2024-07-03
+ * @date 2024-07-06
  * @brief TYPES library example source file #1.
  */
 /**
@@ -70,6 +70,8 @@ int main(int argc, char **argv)
   (void) argv;
 
   (void) printf("TYPES example #1 :: begin\n");
+
+  (void) printf("\nAPI Version: %s\n", TYPES_VERSION_STR);
 
   (void) printf("\nSizes of types:\n\n");
 
